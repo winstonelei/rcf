@@ -39,17 +39,16 @@ public class RcfTcpClientFactory  extends AbstractRcfRpcClientFactory {
 
     private final Timer timer = new Timer("ClientHouseKeepingService", true);
 
-    private static AbstractRcfRpcClientFactory factory = new RcfTcpClientFactory();
+    private static AbstractRcfRpcClientFactory clientFactory = new RcfTcpClientFactory();
 
    public static AbstractRcfRpcClientFactory getInstance(){
-       return factory;
+       return clientFactory;
    }
 
 
     @Override
     public void startClient(int connectTimeout) {
-        // TODO Auto-generated method stub
-        LOGGER.info("----------------客户端开始启动-------------------------------");
+        LOGGER.info("----------------客户端服务开始启动-------------------------------");
         bootstrap.group(workerGroup)
                 .channel(NioSocketChannel.class)
                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, connectTimeout)
@@ -70,7 +69,7 @@ public class RcfTcpClientFactory  extends AbstractRcfRpcClientFactory {
         });
 
 
-        LOGGER.info("----------------客户端启动结束-------------------------------");
+        LOGGER.info("----------------客户端服务启动结束-------------------------------");
     }
 
 

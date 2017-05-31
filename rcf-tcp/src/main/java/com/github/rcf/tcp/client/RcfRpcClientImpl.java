@@ -60,7 +60,6 @@ public class RcfRpcClientImpl extends AbstractRcfRpcClient {
                                 + rcfRequest.getId();
                     }else if (!future.isSuccess()) {
                         if (future.channel().isOpen()) {
-                            // maybe some exception,so close the channel
                             future.channel().close();
                             getClientFactory().removeRpcClient(future.channel().remoteAddress().toString());
                         }
@@ -79,7 +78,6 @@ public class RcfRpcClientImpl extends AbstractRcfRpcClient {
 
     @Override
     public void destroy() throws Exception {
-        // TODO Auto-generated method stub
         RcfTcpClientFactory.getInstance().removeRpcClient(future.channel().remoteAddress().toString());
         if(future.channel().isOpen()){
             future.channel().close();

@@ -38,7 +38,6 @@ public abstract  class AbstractRcfRpcClientFactory implements RcfRpcClientFactor
     @Override
     public void putResponse(int key, LinkedBlockingQueue<Object> queue)
             throws Exception {
-        // TODO Auto-generated method stub
         responses.put(key, queue);
     }
     /**
@@ -92,7 +91,6 @@ public abstract  class AbstractRcfRpcClientFactory implements RcfRpcClientFactor
 
     @Override
     public void removeRpcClient(String key) {
-        // TODO Auto-generated method stub
         if(rpcClients.containsKey(key)){
             rpcClients.remove(key);
         }

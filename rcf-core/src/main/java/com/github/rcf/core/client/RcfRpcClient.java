@@ -7,6 +7,7 @@ import com.github.rcf.core.client.factory.RcfRpcClientFactory;
  */
 public interface RcfRpcClient {
 
+
     public Object invokeImpl(String targetInstanceName, String methodName,
                              String[] argTypes, Object[] args, int timeout, int codecType, int protocolType)
             throws Exception;

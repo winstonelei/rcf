@@ -30,71 +30,18 @@ public abstract class AbstractRcfRpcClient implements  RcfRpcClient{
     }
 
 
-	/*public RemotingCommand invokeSyncImpl(final Channel channel, final RemotingCommand request, final long timeoutMillis)
-			throws InterruptedException, RemotingSendRequestException, RemotingTimeoutException {
-		final int opaque = request.getOpaque();
-		try {
-			final ResponseFuture responseFuture = new ResponseFuture(opaque, timeoutMillis, null, null);
-			this.responseTable.put(opaque, responseFuture);
-			final SocketAddress addr = channel.remoteAddress();
-			channel.writeAndFlush(request).addListener(new ChannelFutureListener() {
-				@Override
-				public void operationComplete(ChannelFuture f) throws Exception {
-					if (f.isSuccess()) {
-						responseFuture.setSendRequestOK(true);
-						return;
-					} else {
-						responseFuture.setSendRequestOK(false);
-					}
-
-					responseTable.remove(opaque);
-					responseFuture.setCause(f.cause());
-					responseFuture.putResponse(null);
-					plog.warn("send a request command to channel <" + addr + "> failed.");
-				}
-			});
-
-			RemotingCommand responseCommand = responseFuture.waitResponse(timeoutMillis);
-			if (null == responseCommand) {
-				if (responseFuture.isSendRequestOK()) {
-					throw new RemotingTimeoutException(RemotingHelper.parseSocketAddressAddr(addr), timeoutMillis,
-							responseFuture.getCause());
-				} else {
-					throw new RemotingSendRequestException(RemotingHelper.parseSocketAddressAddr(addr), responseFuture.getCause());
-				}
-			}
-
-			return responseCommand;
-		} finally {
-			this.responseTable.remove(opaque);
-		}
-	}*/
 
     private Object invokeImplIntern(RcfRequest rocketRPCRequest) throws Exception {
         long beginTime = System.currentTimeMillis();
         LinkedBlockingQueue<Object> responseQueue = new LinkedBlockingQueue<Object>(1);
         getClientFactory().putResponse(rocketRPCRequest.getId(), responseQueue);
         RcfResponse rcfResponse = null;
-        final int opaque = rocketRPCRequest.getId();
-
         try {
-
-//			final ResponseFuture responseFuture = new ResponseFuture(opaque, rocketRPCRequest.getTimeout(), null, null);
-//			this.responseTable.put(opaque, responseFuture);
-            //final SocketAddress addr = channel.remoteAddress();
-
-          /*  if(LOGGER.isDebugEnabled()){
-                LOGGER.debug("client ready to send message,request id: "+rocketRPCRequest.getId());
-            }*/
 
             sendRequest(rocketRPCRequest);
 
-           /* if(LOGGER.isDebugEnabled()){
-                LOGGER.debug("client write message to send buffer,wait for response,request id: "+rocketRPCRequest.getId());
-            }*/
         }catch (Exception e) {
             rcfResponse = null;
-            //LOGGER.error("send request to os sendbuffer error", e);
             throw new RuntimeException("send request to os sendbuffer error", e);
         }
         Object result = null;
@@ -151,9 +98,6 @@ public abstract class AbstractRcfRpcClient implements  RcfRpcClient{
             String errorMsg = "server error,server is: " + getServerIP()
                     + ":" + getServerPort() + " request id is:"
                     + rocketRPCRequest.getId();
-           // LOGGER.error(errorMsg, t);
-            //destroy();
-            //throw new Exception(errorMsg, t);
             return null;
         }
 
@@ -165,9 +109,6 @@ public abstract class AbstractRcfRpcClient implements  RcfRpcClient{
      * @throws Exception
      */
     public abstract void sendRequest(RcfRequest RcfRequest) throws Exception;
-    /**
-     * 消灭消息
-     * @throws Exception
-     */
+
     public abstract void destroy() throws Exception;
 }
