@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/rcf.iml" filepath="$PROJECT_DIR$/rcf.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rcf-core/rcf-core.iml" filepath="$PROJECT_DIR$/rcf-core/rcf-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rcf-http/rcf-http.iml" filepath="$PROJECT_DIR$/rcf-http/rcf-http.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rcf-interceptor/rcf-interceptor.iml" filepath="$PROJECT_DIR$/rcf-interceptor/rcf-interceptor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rcf-registry/rcf-registry.iml" filepath="$PROJECT_DIR$/rcf-registry/rcf-registry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rcf-service/rcf-service.iml" filepath="$PROJECT_DIR$/rcf-service/rcf-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rcf-tcp/rcf-tcp.iml" filepath="$PROJECT_DIR$/rcf-tcp/rcf-tcp.iml" />
+    </modules>
+  </component>
+</project>

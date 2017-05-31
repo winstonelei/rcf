@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <resourceExtensions />
+    <wildcardResourcePatterns>
+      <entry name="!?*.java" />
+      <entry name="!?*.form" />
+      <entry name="!?*.class" />
+      <entry name="!?*.groovy" />
+      <entry name="!?*.scala" />
+      <entry name="!?*.flex" />
+      <entry name="!?*.kt" />
+      <entry name="!?*.clj" />
+      <entry name="!?*.aj" />
+    </wildcardResourcePatterns>
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="false">
+        <processorPath useClasspath="true" />
+      </profile>
+      <profile default="false" name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="rcf-core" />
+        <module name="rcf-http" />
+        <module name="rcf-interceptor" />
+        <module name="rcf-registry" />
+        <module name="rcf-service" />
+        <module name="rcf-tcp" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.8">
+      <module name="rcf" target="1.5" />
+      <module name="rcf-core" target="1.6" />
+      <module name="rcf-http" target="1.6" />
+      <module name="rcf-interceptor" target="1.6" />
+      <module name="rcf-registry" target="1.5" />
+      <module name="rcf-service" target="1.6" />
+      <module name="rcf-tcp" target="1.6" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

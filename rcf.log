@@ -1,0 +1,137 @@
+rcfrpc Logger: INFO{AbstractApplicationContext.java:411}-Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@64bf3bbf: display name [org.springframework.context.support.ClassPathXmlApplicationContext@64bf3bbf]; startup date [Wed May 31 16:16:38 CST 2017]; root of context hierarchy
+rcfrpc Logger: INFO{XmlBeanDefinitionReader.java:323}-Loading XML bean definitions from class path resource [RcfRpcServer.xml]
+rcfrpc Logger: INFO{AbstractApplicationContext.java:426}-Bean factory for application context [org.springframework.context.support.ClassPathXmlApplicationContext@64bf3bbf]: org.springframework.beans.factory.support.DefaultListableBeanFactory@5e4c8041
+rcfrpc Logger: INFO{DefaultListableBeanFactory.java:414}-Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@5e4c8041: defining beans [rpcRegistryApplication,rpcRegistry,com.github.rcf.tcp.demo.service.IDemoService,demoService]; root of factory hierarchy
+rcfrpc Logger: INFO{CuratorFrameworkImpl.java:230}-Starting
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:zookeeper.version=3.4.6-1569965, built on 02/20/2014 09:09 GMT
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:host.name=dell-PC
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:java.version=1.8.0_91
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:java.vendor=Oracle Corporation
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:java.home=F:\installsoft\java\jre
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:java.class.path=F:\installsoft\java\jre\lib\charsets.jar;F:\installsoft\java\jre\lib\deploy.jar;F:\installsoft\java\jre\lib\ext\access-bridge-64.jar;F:\installsoft\java\jre\lib\ext\cldrdata.jar;F:\installsoft\java\jre\lib\ext\dnsns.jar;F:\installsoft\java\jre\lib\ext\jaccess.jar;F:\installsoft\java\jre\lib\ext\jfxrt.jar;F:\installsoft\java\jre\lib\ext\localedata.jar;F:\installsoft\java\jre\lib\ext\nashorn.jar;F:\installsoft\java\jre\lib\ext\sunec.jar;F:\installsoft\java\jre\lib\ext\sunjce_provider.jar;F:\installsoft\java\jre\lib\ext\sunmscapi.jar;F:\installsoft\java\jre\lib\ext\sunpkcs11.jar;F:\installsoft\java\jre\lib\ext\zipfs.jar;F:\installsoft\java\jre\lib\javaws.jar;F:\installsoft\java\jre\lib\jce.jar;F:\installsoft\java\jre\lib\jfr.jar;F:\installsoft\java\jre\lib\jfxswt.jar;F:\installsoft\java\jre\lib\jsse.jar;F:\installsoft\java\jre\lib\management-agent.jar;F:\installsoft\java\jre\lib\plugin.jar;F:\installsoft\java\jre\lib\resources.jar;F:\installsoft\java\jre\lib\rt.jar;F:\gitworkspace\java\rcf\rcf-tcp\target\test-classes;F:\gitworkspace\java\rcf\rcf-tcp\target\classes;F:\installsoft\maven\repository\io\netty\netty-all\4.0.27.Final\netty-all-4.0.27.Final.jar;F:\installsoft\maven\repository\redis\clients\jedis\2.8.0\jedis-2.8.0.jar;F:\installsoft\maven\repository\org\apache\commons\commons-pool2\2.3\commons-pool2-2.3.jar;F:\gitworkspace\java\rcf\rcf-core\target\classes;F:\installsoft\maven\repository\com\google\protobuf\protobuf-java\2.6.1\protobuf-java-2.6.1.jar;F:\installsoft\maven\repository\com\esotericsoftware\kryo\kryo\2.24.0\kryo-2.24.0.jar;F:\installsoft\maven\repository\com\esotericsoftware\minlog\minlog\1.2\minlog-1.2.jar;F:\installsoft\maven\repository\org\objenesis\objenesis\2.1\objenesis-2.1.jar;F:\installsoft\maven\repository\com\alibaba\fastjson\1.1.23\fastjson-1.1.23.jar;F:\installsoft\maven\repository\javassist\javassist\3.12.1.GA\javassist-3.12.1.GA.jar;F:\installsoft\maven\repository\cglib\cglib\3.1\cglib-3.1.jar;F:\installsoft\maven\repository\org\ow2\asm\asm\4.2\asm-4.2.jar;F:\gitworkspace\java\rcf\rcf-interceptor\target\classes;F:\installsoft\maven\repository\org\springframework\spring\2.5.6\spring-2.5.6.jar;F:\installsoft\maven\repository\org\springframework\spring-context\3.2.8.RELEASE\spring-context-3.2.8.RELEASE.jar;F:\installsoft\maven\repository\org\springframework\spring-context-support\3.2.8.RELEASE\spring-context-support-3.2.8.RELEASE.jar;F:\installsoft\maven\repository\org\slf4j\slf4j-log4j12\1.7.6\slf4j-log4j12-1.7.6.jar;F:\installsoft\maven\repository\org\slf4j\jcl-over-slf4j\1.7.6\jcl-over-slf4j-1.7.6.jar;F:\installsoft\maven\repository\org\slf4j\jul-to-slf4j\1.7.6\jul-to-slf4j-1.7.6.jar;F:\gitworkspace\java\rcf\rcf-service\target\classes;F:\gitworkspace\java\rcf\rcf-registry\target\classes;F:\installsoft\maven\repository\org\apache\curator\curator-recipes\2.6.0\curator-recipes-2.6.0.jar;F:\installsoft\maven\repository\org\apache\curator\curator-framework\2.6.0\curator-framework-2.6.0.jar;F:\installsoft\maven\repository\org\apache\zookeeper\zookeeper\3.4.6\zookeeper-3.4.6.jar;F:\installsoft\maven\repository\org\slf4j\slf4j-api\1.7.6\slf4j-api-1.7.6.jar;F:\installsoft\maven\repository\log4j\log4j\1.2.17\log4j-1.2.17.jar;F:\installsoft\maven\repository\com\google\guava\guava\16.0.1\guava-16.0.1.jar;F:\installsoft\maven\repository\org\apache\curator\curator-client\2.6.0\curator-client-2.6.0.jar;F:\installsoft\maven\repository\com\github\sgroschupf\zkclient\0.1\zkclient-0.1.jar;F:\installsoft\maven\repository\junit\junit\3.8.1\junit-3.8.1.jar;F:\installsoft\maven\repository\commons-logging\commons-logging\1.1.1\commons-logging-1.1.1.jar;F:\installsoft\maven\repository\org\springframework\spring-aop\3.2.8.RELEASE\spring-aop-3.2.8.RELEASE.jar;F:\installsoft\maven\repository\aopalliance\aopalliance\1.0\aopalliance-1.0.jar;F:\installsoft\maven\repository\org\springframework\spring-beans\3.2.8.RELEASE\spring-beans-3.2.8.RELEASE.jar;F:\installsoft\maven\repository\org\springframework\spring-core\3.2.8.RELEASE\spring-core-3.2.8.RELEASE.jar;F:\installsoft\maven\repository\org\springframework\spring-expression\3.2.8.RELEASE\spring-expression-3.2.8.RELEASE.jar;F:\installsoft\IntelliJ IDEA 2016.1.3\lib\idea_rt.jar
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:java.library.path=F:\installsoft\java\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;F:\installsoft\python3\Lib\site-packages\PyQt5;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\TortoiseSVN\bin;F:\installsoft\java\bin;F:\installsoft\java\jre\bin;F:\installsoft\maven\bin;F:\installsoft\scala\bin;F:\installsoft\scala2\bin;F:\installsoft\scala2\jre\bin;F:\installsoft\scala2\bin;C:\Python27;C:\Python27\Scripts;F:\installsoft\apache-ant-1.9.7\bin;F:\hadooplib\hadoop-2.5.2\bin;F:\installsoft\python3;F:\installsoft\python3\Scripts;F:\installsoft\git\tortisegit\bin;F:\Program Files (x86)\OpenVPN\bin;.
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:java.io.tmpdir=C:\Users\dell\AppData\Local\Temp\
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:java.compiler=<NA>
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:os.name=Windows 7
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:os.arch=amd64
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:os.version=6.1
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:user.name=dell
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:user.home=C:\Users\dell
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:user.dir=F:\gitworkspace\java\rcf
+rcfrpc Logger: INFO{ZooKeeper.java:438}-Initiating client connection, connectString=121.40.129.155:2181 sessionTimeout=60000 watcher=org.apache.curator.ConnectionState@10feca44
+rcfrpc Logger: INFO{ClientCnxn.java:975}-Opening socket connection to server 121.40.129.155/121.40.129.155:2181. Will not attempt to authenticate using SASL (unknown error)
+rcfrpc Logger: INFO{ClientCnxn.java:852}-Socket connection established to 121.40.129.155/121.40.129.155:2181, initiating session
+rcfrpc Logger: INFO{ClientCnxn.java:1235}-Session establishment complete on server 121.40.129.155/121.40.129.155:2181, sessionid = 0x35c3e5f028d00e1, negotiated timeout = 40000
+rcfrpc Logger: INFO{ConnectionStateManager.java:228}-State change: CONNECTED
+rcfrpc Logger: INFO{RcfTcpServer.java:119}------------------开始启动--------------------------
+rcfrpc Logger: INFO{RcfTcpServer.java:121}-端口号：10010的服务端已经启动
+rcfrpc Logger: INFO{RcfTcpServer.java:122}------------------启动结束--------------------------
+rcfrpc Logger: INFO{AbstractApplicationContext.java:411}-Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@64bf3bbf: display name [org.springframework.context.support.ClassPathXmlApplicationContext@64bf3bbf]; startup date [Wed May 31 16:16:57 CST 2017]; root of context hierarchy
+rcfrpc Logger: INFO{XmlBeanDefinitionReader.java:323}-Loading XML bean definitions from class path resource [RcfRpcClient.xml]
+rcfrpc Logger: INFO{AbstractApplicationContext.java:426}-Bean factory for application context [org.springframework.context.support.ClassPathXmlApplicationContext@64bf3bbf]: org.springframework.beans.factory.support.DefaultListableBeanFactory@3b2cf7ab
+rcfrpc Logger: INFO{DefaultListableBeanFactory.java:414}-Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@3b2cf7ab: defining beans [rpcRegistryApplicationClient,demoServiceClient]; root of factory hierarchy
+rcfrpc Logger: INFO{CuratorFrameworkImpl.java:230}-Starting
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:zookeeper.version=3.4.6-1569965, built on 02/20/2014 09:09 GMT
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:host.name=dell-PC
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:java.version=1.8.0_91
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:java.vendor=Oracle Corporation
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:java.home=F:\installsoft\java\jre
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:java.class.path=F:\installsoft\java\jre\lib\charsets.jar;F:\installsoft\java\jre\lib\deploy.jar;F:\installsoft\java\jre\lib\ext\access-bridge-64.jar;F:\installsoft\java\jre\lib\ext\cldrdata.jar;F:\installsoft\java\jre\lib\ext\dnsns.jar;F:\installsoft\java\jre\lib\ext\jaccess.jar;F:\installsoft\java\jre\lib\ext\jfxrt.jar;F:\installsoft\java\jre\lib\ext\localedata.jar;F:\installsoft\java\jre\lib\ext\nashorn.jar;F:\installsoft\java\jre\lib\ext\sunec.jar;F:\installsoft\java\jre\lib\ext\sunjce_provider.jar;F:\installsoft\java\jre\lib\ext\sunmscapi.jar;F:\installsoft\java\jre\lib\ext\sunpkcs11.jar;F:\installsoft\java\jre\lib\ext\zipfs.jar;F:\installsoft\java\jre\lib\javaws.jar;F:\installsoft\java\jre\lib\jce.jar;F:\installsoft\java\jre\lib\jfr.jar;F:\installsoft\java\jre\lib\jfxswt.jar;F:\installsoft\java\jre\lib\jsse.jar;F:\installsoft\java\jre\lib\management-agent.jar;F:\installsoft\java\jre\lib\plugin.jar;F:\installsoft\java\jre\lib\resources.jar;F:\installsoft\java\jre\lib\rt.jar;F:\gitworkspace\java\rcf\rcf-tcp\target\test-classes;F:\gitworkspace\java\rcf\rcf-tcp\target\classes;F:\installsoft\maven\repository\io\netty\netty-all\4.0.27.Final\netty-all-4.0.27.Final.jar;F:\installsoft\maven\repository\redis\clients\jedis\2.8.0\jedis-2.8.0.jar;F:\installsoft\maven\repository\org\apache\commons\commons-pool2\2.3\commons-pool2-2.3.jar;F:\gitworkspace\java\rcf\rcf-core\target\classes;F:\installsoft\maven\repository\com\google\protobuf\protobuf-java\2.6.1\protobuf-java-2.6.1.jar;F:\installsoft\maven\repository\com\esotericsoftware\kryo\kryo\2.24.0\kryo-2.24.0.jar;F:\installsoft\maven\repository\com\esotericsoftware\minlog\minlog\1.2\minlog-1.2.jar;F:\installsoft\maven\repository\org\objenesis\objenesis\2.1\objenesis-2.1.jar;F:\installsoft\maven\repository\com\alibaba\fastjson\1.1.23\fastjson-1.1.23.jar;F:\installsoft\maven\repository\javassist\javassist\3.12.1.GA\javassist-3.12.1.GA.jar;F:\installsoft\maven\repository\cglib\cglib\3.1\cglib-3.1.jar;F:\installsoft\maven\repository\org\ow2\asm\asm\4.2\asm-4.2.jar;F:\gitworkspace\java\rcf\rcf-interceptor\target\classes;F:\installsoft\maven\repository\org\springframework\spring\2.5.6\spring-2.5.6.jar;F:\installsoft\maven\repository\org\springframework\spring-context\3.2.8.RELEASE\spring-context-3.2.8.RELEASE.jar;F:\installsoft\maven\repository\org\springframework\spring-context-support\3.2.8.RELEASE\spring-context-support-3.2.8.RELEASE.jar;F:\installsoft\maven\repository\org\slf4j\slf4j-log4j12\1.7.6\slf4j-log4j12-1.7.6.jar;F:\installsoft\maven\repository\org\slf4j\jcl-over-slf4j\1.7.6\jcl-over-slf4j-1.7.6.jar;F:\installsoft\maven\repository\org\slf4j\jul-to-slf4j\1.7.6\jul-to-slf4j-1.7.6.jar;F:\gitworkspace\java\rcf\rcf-service\target\classes;F:\gitworkspace\java\rcf\rcf-registry\target\classes;F:\installsoft\maven\repository\org\apache\curator\curator-recipes\2.6.0\curator-recipes-2.6.0.jar;F:\installsoft\maven\repository\org\apache\curator\curator-framework\2.6.0\curator-framework-2.6.0.jar;F:\installsoft\maven\repository\org\apache\zookeeper\zookeeper\3.4.6\zookeeper-3.4.6.jar;F:\installsoft\maven\repository\org\slf4j\slf4j-api\1.7.6\slf4j-api-1.7.6.jar;F:\installsoft\maven\repository\log4j\log4j\1.2.17\log4j-1.2.17.jar;F:\installsoft\maven\repository\com\google\guava\guava\16.0.1\guava-16.0.1.jar;F:\installsoft\maven\repository\org\apache\curator\curator-client\2.6.0\curator-client-2.6.0.jar;F:\installsoft\maven\repository\com\github\sgroschupf\zkclient\0.1\zkclient-0.1.jar;F:\installsoft\maven\repository\junit\junit\3.8.1\junit-3.8.1.jar;F:\installsoft\maven\repository\commons-logging\commons-logging\1.1.1\commons-logging-1.1.1.jar;F:\installsoft\maven\repository\org\springframework\spring-aop\3.2.8.RELEASE\spring-aop-3.2.8.RELEASE.jar;F:\installsoft\maven\repository\aopalliance\aopalliance\1.0\aopalliance-1.0.jar;F:\installsoft\maven\repository\org\springframework\spring-beans\3.2.8.RELEASE\spring-beans-3.2.8.RELEASE.jar;F:\installsoft\maven\repository\org\springframework\spring-core\3.2.8.RELEASE\spring-core-3.2.8.RELEASE.jar;F:\installsoft\maven\repository\org\springframework\spring-expression\3.2.8.RELEASE\spring-expression-3.2.8.RELEASE.jar;F:\installsoft\IntelliJ IDEA 2016.1.3\lib\idea_rt.jar
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:java.library.path=F:\installsoft\java\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;F:\installsoft\python3\Lib\site-packages\PyQt5;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\TortoiseSVN\bin;F:\installsoft\java\bin;F:\installsoft\java\jre\bin;F:\installsoft\maven\bin;F:\installsoft\scala\bin;F:\installsoft\scala2\bin;F:\installsoft\scala2\jre\bin;F:\installsoft\scala2\bin;C:\Python27;C:\Python27\Scripts;F:\installsoft\apache-ant-1.9.7\bin;F:\hadooplib\hadoop-2.5.2\bin;F:\installsoft\python3;F:\installsoft\python3\Scripts;F:\installsoft\git\tortisegit\bin;F:\Program Files (x86)\OpenVPN\bin;.
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:java.io.tmpdir=C:\Users\dell\AppData\Local\Temp\
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:java.compiler=<NA>
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:os.name=Windows 7
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:os.arch=amd64
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:os.version=6.1
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:user.name=dell
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:user.home=C:\Users\dell
+rcfrpc Logger: INFO{Environment.java:100}-Client environment:user.dir=F:\gitworkspace\java\rcf
+rcfrpc Logger: INFO{ZooKeeper.java:438}-Initiating client connection, connectString=121.40.129.155:2181 sessionTimeout=60000 watcher=org.apache.curator.ConnectionState@2fd1433e
+rcfrpc Logger: INFO{ClientCnxn.java:975}-Opening socket connection to server 121.40.129.155/121.40.129.155:2181. Will not attempt to authenticate using SASL (unknown error)
+rcfrpc Logger: INFO{RcfTcpClientFactory.java:52}-----------------客户端开始启动-------------------------------
+rcfrpc Logger: INFO{RcfTcpClientFactory.java:73}-----------------客户端启动结束-------------------------------
+rcfrpc Logger: INFO{ClientCnxn.java:852}-Socket connection established to 121.40.129.155/121.40.129.155:2181, initiating session
+rcfrpc Logger: INFO{ClientCnxn.java:1235}-Session establishment complete on server 121.40.129.155/121.40.129.155:2181, sessionid = 0x35c3e5f028d00e2, negotiated timeout = 40000
+rcfrpc Logger: INFO{ConnectionStateManager.java:228}-State change: CONNECTED
+rcfrpc Logger:ERROR{RcfTcpHandler.java:54}-远程主机ip和端口=/172.16.40.246:53281
+rcfrpc Logger: INFO{ClientCnxn.java:1098}-Unable to read additional data from server sessionid 0x35c3e5f028d00e2, likely server has closed socket, closing socket connection and attempting reconnect
+rcfrpc Logger: INFO{ConnectionStateManager.java:228}-State change: SUSPENDED
+rcfrpc Logger: INFO{ClientCnxn.java:975}-Opening socket connection to server 121.40.129.155/121.40.129.155:2181. Will not attempt to authenticate using SASL (unknown error)
+rcfrpc Logger: INFO{ClientCnxn.java:852}-Socket connection established to 121.40.129.155/121.40.129.155:2181, initiating session
+rcfrpc Logger: INFO{ClientCnxn.java:1094}-Unable to reconnect to ZooKeeper service, session 0x35c3e5f028d00e2 has expired, closing socket connection
+rcfrpc Logger: INFO{ConnectionStateManager.java:228}-State change: LOST
+rcfrpc Logger: WARN{ConnectionState.java:289}-Session expired event received
+rcfrpc Logger: INFO{ZooKeeper.java:438}-Initiating client connection, connectString=121.40.129.155:2181 sessionTimeout=60000 watcher=org.apache.curator.ConnectionState@2fd1433e
+rcfrpc Logger: INFO{ClientCnxn.java:512}-EventThread shut down
+rcfrpc Logger: INFO{ClientCnxn.java:975}-Opening socket connection to server 121.40.129.155/121.40.129.155:2181. Will not attempt to authenticate using SASL (unknown error)
+rcfrpc Logger: INFO{ClientCnxn.java:852}-Socket connection established to 121.40.129.155/121.40.129.155:2181, initiating session
+rcfrpc Logger: INFO{ClientCnxn.java:1235}-Session establishment complete on server 121.40.129.155/121.40.129.155:2181, sessionid = 0x35c3e5f028d00e3, negotiated timeout = 40000
+rcfrpc Logger: INFO{ConnectionStateManager.java:228}-State change: RECONNECTED
+rcfrpc Logger: INFO{ClientCnxn.java:1098}-Unable to read additional data from server sessionid 0x35c3e5f028d00e3, likely server has closed socket, closing socket connection and attempting reconnect
+rcfrpc Logger: INFO{ConnectionStateManager.java:228}-State change: SUSPENDED
+rcfrpc Logger: INFO{ClientCnxn.java:975}-Opening socket connection to server 121.40.129.155/121.40.129.155:2181. Will not attempt to authenticate using SASL (unknown error)
+rcfrpc Logger: INFO{ClientCnxn.java:852}-Socket connection established to 121.40.129.155/121.40.129.155:2181, initiating session
+rcfrpc Logger: INFO{ClientCnxn.java:1094}-Unable to reconnect to ZooKeeper service, session 0x35c3e5f028d00e3 has expired, closing socket connection
+rcfrpc Logger: INFO{ConnectionStateManager.java:228}-State change: LOST
+rcfrpc Logger: WARN{ConnectionState.java:289}-Session expired event received
+rcfrpc Logger: INFO{ZooKeeper.java:438}-Initiating client connection, connectString=121.40.129.155:2181 sessionTimeout=60000 watcher=org.apache.curator.ConnectionState@2fd1433e
+rcfrpc Logger: INFO{ClientCnxn.java:512}-EventThread shut down
+rcfrpc Logger: INFO{ClientCnxn.java:975}-Opening socket connection to server 121.40.129.155/121.40.129.155:2181. Will not attempt to authenticate using SASL (unknown error)
+rcfrpc Logger: INFO{ClientCnxn.java:852}-Socket connection established to 121.40.129.155/121.40.129.155:2181, initiating session
+rcfrpc Logger: INFO{ClientCnxn.java:1235}-Session establishment complete on server 121.40.129.155/121.40.129.155:2181, sessionid = 0x35c3e5f028d00e4, negotiated timeout = 40000
+rcfrpc Logger: INFO{ConnectionStateManager.java:228}-State change: RECONNECTED
+rcfrpc Logger:ERROR{ConnectionState.java:201}-Connection timed out for connection string (121.40.129.155:2181) and timeout (5000) / elapsed (26544)
+org.apache.curator.CuratorConnectionLossException: KeeperErrorCode = ConnectionLoss
+	at org.apache.curator.ConnectionState.checkTimeouts(ConnectionState.java:198)
+	at org.apache.curator.ConnectionState.getZooKeeper(ConnectionState.java:88)
+	at org.apache.curator.CuratorZookeeperClient.getZooKeeper(CuratorZookeeperClient.java:115)
+	at org.apache.curator.framework.imps.CuratorFrameworkImpl.performBackgroundOperation(CuratorFrameworkImpl.java:793)
+	at org.apache.curator.framework.imps.CuratorFrameworkImpl.backgroundOperationsLoop(CuratorFrameworkImpl.java:779)
+	at org.apache.curator.framework.imps.CuratorFrameworkImpl.access$400(CuratorFrameworkImpl.java:58)
+	at org.apache.curator.framework.imps.CuratorFrameworkImpl$4.call(CuratorFrameworkImpl.java:265)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+rcfrpc Logger: INFO{ClientCnxn.java:1096}-Client session timed out, have not heard from server in 37878ms for sessionid 0x35c3e5f028d00e4, closing socket connection and attempting reconnect
+rcfrpc Logger: INFO{ConnectionStateManager.java:228}-State change: SUSPENDED
+rcfrpc Logger: INFO{ClientCnxn.java:975}-Opening socket connection to server 121.40.129.155/121.40.129.155:2181. Will not attempt to authenticate using SASL (unknown error)
+rcfrpc Logger: INFO{ClientCnxn.java:852}-Socket connection established to 121.40.129.155/121.40.129.155:2181, initiating session
+rcfrpc Logger: INFO{ClientCnxn.java:1235}-Session establishment complete on server 121.40.129.155/121.40.129.155:2181, sessionid = 0x35c3e5f028d00e4, negotiated timeout = 40000
+rcfrpc Logger: INFO{ConnectionStateManager.java:228}-State change: RECONNECTED
+rcfrpc Logger: INFO{ClientCnxn.java:1096}-Client session timed out, have not heard from server in 43216ms for sessionid 0x35c3e5f028d00e1, closing socket connection and attempting reconnect
+rcfrpc Logger: INFO{ConnectionStateManager.java:228}-State change: SUSPENDED
+rcfrpc Logger: INFO{ClientCnxn.java:975}-Opening socket connection to server 121.40.129.155/121.40.129.155:2181. Will not attempt to authenticate using SASL (unknown error)
+rcfrpc Logger: INFO{ClientCnxn.java:852}-Socket connection established to 121.40.129.155/121.40.129.155:2181, initiating session
+rcfrpc Logger: INFO{ClientCnxn.java:1094}-Unable to reconnect to ZooKeeper service, session 0x35c3e5f028d00e1 has expired, closing socket connection
+rcfrpc Logger: INFO{ConnectionStateManager.java:228}-State change: LOST
+rcfrpc Logger: WARN{ConnectionState.java:289}-Session expired event received
+rcfrpc Logger: INFO{ZooKeeper.java:438}-Initiating client connection, connectString=121.40.129.155:2181 sessionTimeout=60000 watcher=org.apache.curator.ConnectionState@10feca44
+rcfrpc Logger: INFO{ClientCnxn.java:512}-EventThread shut down
+rcfrpc Logger: INFO{ClientCnxn.java:975}-Opening socket connection to server 121.40.129.155/121.40.129.155:2181. Will not attempt to authenticate using SASL (unknown error)
+rcfrpc Logger: INFO{ClientCnxn.java:852}-Socket connection established to 121.40.129.155/121.40.129.155:2181, initiating session
+rcfrpc Logger:ERROR{RpcTcpServerHandlerImpl.java:101}-请求结果返回值处理后的结果=com.github.rcf.tcp.demo.service.Simple@29ba606b
+rcfrpc Logger:ERROR{RcfTcpHandler.java:98}-11212remoteaddredss=/172.16.40.246:53281
+rcfrpc Logger: INFO{ClientCnxn.java:1235}-Session establishment complete on server 121.40.129.155/121.40.129.155:2181, sessionid = 0x35c3e5f028d00e5, negotiated timeout = 40000
+rcfrpc Logger: INFO{ConnectionStateManager.java:228}-State change: RECONNECTED
+rcfrpc Logger: INFO{ClientCnxn.java:1096}-Client session timed out, have not heard from server in 40784ms for sessionid 0x35c3e5f028d00e4, closing socket connection and attempting reconnect
+rcfrpc Logger: INFO{ConnectionStateManager.java:228}-State change: SUSPENDED
+rcfrpc Logger: INFO{ClientCnxn.java:975}-Opening socket connection to server 121.40.129.155/121.40.129.155:2181. Will not attempt to authenticate using SASL (unknown error)
+rcfrpc Logger: INFO{ClientCnxn.java:852}-Socket connection established to 121.40.129.155/121.40.129.155:2181, initiating session
+rcfrpc Logger: INFO{ConnectionStateManager.java:228}-State change: LOST
+rcfrpc Logger: WARN{ConnectionState.java:289}-Session expired event received
+rcfrpc Logger: INFO{ZooKeeper.java:438}-Initiating client connection, connectString=121.40.129.155:2181 sessionTimeout=60000 watcher=org.apache.curator.ConnectionState@2fd1433e
+rcfrpc Logger:ERROR{AbstractRcfRpcClientFactory.java:53}-give up the response,request id is:1,maybe because timeout!
+rcfrpc Logger: INFO{ClientCnxn.java:1094}-Unable to reconnect to ZooKeeper service, session 0x35c3e5f028d00e4 has expired, closing socket connection
+rcfrpc Logger: INFO{ClientCnxn.java:512}-EventThread shut down
+rcfrpc Logger: INFO{ClientCnxn.java:975}-Opening socket connection to server 121.40.129.155/121.40.129.155:2181. Will not attempt to authenticate using SASL (unknown error)
+rcfrpc Logger: INFO{ClientCnxn.java:852}-Socket connection established to 121.40.129.155/121.40.129.155:2181, initiating session
+rcfrpc Logger: INFO{ClientCnxn.java:1235}-Session establishment complete on server 121.40.129.155/121.40.129.155:2181, sessionid = 0x35c3e5f028d00e6, negotiated timeout = 40000
+rcfrpc Logger: INFO{ConnectionStateManager.java:228}-State change: RECONNECTED
+rcfrpc Logger: INFO{AbstractApplicationContext.java:411}-Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@1edf1c96: display name [org.springframework.context.support.ClassPathXmlApplicationContext@1edf1c96]; startup date [Wed May 31 16:37:40 CST 2017]; root of context hierarchy
+rcfrpc Logger: INFO{XmlBeanDefinitionReader.java:323}-Loading XML bean definitions from class path resource [CommonRpcHttpServer.xml]
+rcfrpc Logger: INFO{AbstractApplicationContext.java:426}-Bean factory for application context [org.springframework.context.support.ClassPathXmlApplicationContext@1edf1c96]: org.springframework.beans.factory.support.DefaultListableBeanFactory@3c5a99da
+rcfrpc Logger: INFO{DefaultListableBeanFactory.java:414}-Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@3c5a99da: defining beans [rpcRegistry,Demo,demoService]; root of factory hierarchy
+rcfrpc Logger: INFO{RcfHttpServer.java:89}------------------开始启动--------------------------
+rcfrpc Logger: INFO{RcfHttpServer.java:91}-端口号：10009的 http 服务端已经启动
+rcfrpc Logger: INFO{RcfHttpServer.java:92}------------------启动结束--------------------------

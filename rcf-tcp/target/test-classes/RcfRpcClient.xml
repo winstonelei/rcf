@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:rcfrpc="http://www.rcf.com/rcfrpc"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-2.5.xsd
+        http://www.springframework.org/schema/aop 
+        http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+        http://www.rcf.com/rcfrpc
+        http://www.rcf.com/rcfrpc/rcfrpc.xsd
+        http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+    
+    <!--zk 注册中心地址  -->
+    <rcfrpc:application id="rpcRegistryApplicationClient" address="121.40.129.155:2181" flag="2" timeout="20000"></rcfrpc:application>
+    
+    <!--group 可以同时支持多组，以符合,隔开  -->
+    <rcfrpc:reference id="demoServiceClient"  interfacename="com.github.rcf.tcp.demo.service.IDemoService"  procotolType="1" codecType="1" timeout="1000"  group="demo"/>
+
+
+</beans>
