@@ -60,12 +60,7 @@
             <artifactId>jcl-over-slf4j</artifactId>
             <version>1.7.6</version>
         </dependency>
-        <!-- java.util.logging 实际调用slf4j -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jul-to-slf4j</artifactId>
-            <version>1.7.6</version>
-        </dependency>
+
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
@@ -78,8 +73,6 @@
             <version>3.12.1.GA</version>
         </dependency>
     </dependencies>
-
-
 
 
     <modules>

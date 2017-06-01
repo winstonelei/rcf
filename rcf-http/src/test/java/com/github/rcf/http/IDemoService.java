@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author liubing1
+ * @author winstone
  *
  */
 public interface IDemoService {
