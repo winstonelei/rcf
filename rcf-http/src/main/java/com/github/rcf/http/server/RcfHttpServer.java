@@ -35,6 +35,8 @@ public class RcfHttpServer implements RcfRpcServer {
 
     private NioEventLoopGroup workerGroup;
 
+    private static final int threadCount = 100;
+
     public RcfHttpServer(){}
 
     private static  class SingletonHandler{
@@ -82,13 +84,13 @@ public class RcfHttpServer implements RcfRpcServer {
                 pipeline.addLast("codec", new HttpServerCodec());
                 pipeline.addLast("aggegator", new HttpObjectAggregator(512 * 1024));
                 pipeline.addLast("timeout",new IdleStateHandler(0, 0, 120));
-                pipeline.addLast("biz", new RcfHttpServerHandler());
+                pipeline.addLast("biz", new RcfHttpServerHandler(threadCount));
             }
 
         });
         LOGGER.info("-----------------开始启动--------------------------");
         bootstrap.bind(new InetSocketAddress(port)).sync();
-        LOGGER.info("端口号："+port+"的 http 服务端已经启动");
+        LOGGER.info("端口号："+port+" 的 rcf http 服务端已经启动");
         LOGGER.info("-----------------启动结束--------------------------");
     }
 }

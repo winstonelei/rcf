@@ -1,7 +1,8 @@
-package com.github.rcf.core.loadBlance;
+package com.github.rcf.core.loadBlance.impl;
 
 
 
+import com.github.rcf.core.loadBlance.AbstractLoadBalance;
 import com.github.rcf.core.util.ThreadLocalRandom;
 
 import java.util.List;

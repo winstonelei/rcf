@@ -4,7 +4,8 @@ import com.github.rcf.client.service.api.ClientServiceApi;
 import com.github.rcf.core.client.RcfRpcClient;
 import com.github.rcf.core.client.factory.RcfRpcClientFactory;
 import com.github.rcf.core.loadBlance.LoadBalance;
-import com.github.rcf.core.loadBlance.RandomLoadBalance;
+import com.github.rcf.core.loadBlance.LoadBalanceFactory;
+import com.github.rcf.core.loadBlance.impl.RandomLoadBalance;
 import com.github.rcf.core.route.RouteServer;
 import com.github.rcf.core.util.SocketAddressUtil;
 
@@ -42,18 +43,15 @@ public abstract  class AbstarctRcfInvocationHandler implements
     @Override
     public Object invoke(Object proxy, Method method, Object[] args)
             throws Throwable {
-        RcfRpcClient client = null;
-
         Set<InetSocketAddress> addresses = ClientServiceApi.getInstance().getServersByGroup(group);
 
         List<RouteServer> servers= SocketAddressUtil.getInetSocketAddress(addresses);
-
-        //通过负载均衡算法实现
-        LoadBalance loadBalance = new RandomLoadBalance();
+        //通过负载均衡算法实现服务端负载均衡
+        LoadBalance loadBalance = LoadBalanceFactory.getLoadBalance();
         RouteServer rpcRouteServer = loadBalance.select(servers,null);
         InetSocketAddress server = rpcRouteServer.getServer();
 
-        client = getClientFactory().getClient(server.getAddress().getHostAddress(), server.getPort());
+        RcfRpcClient client = getClientFactory().getClient(server.getAddress().getHostAddress(), server.getPort());
         String methodName = method.getName();
         String[] argTypes = createParamSignature(method.getParameterTypes());
         Object result= client.invokeImpl(targetInstanceName, methodName, argTypes, args, timeout, codecType);

@@ -108,7 +108,7 @@ public class RcfTcpServer  implements RcfRpcServer{
         });
         LOGGER.info("-----------------开始启动--------------------------");
         bootstrap.bind(new InetSocketAddress(port)).sync();
-        LOGGER.info("端口号："+port+"的服务端已经启动");
+        LOGGER.info("端口号："+port+"的 rcf tcp 服务端已经启动");
         LOGGER.info("-----------------启动结束--------------------------");
     }
 }

@@ -3,6 +3,7 @@ package com.github.rcf.http.server.handler;
 import com.alibaba.fastjson.JSONObject;
 import com.github.rcf.core.route.RpcServiceRouteMessage;
 import com.github.rcf.core.server.process.handlerFactory.RcfRpcServerHandlerFactory;
+import com.github.rcf.core.thread.CountableThreadPool;
 import com.github.rcf.core.util.StringUtils;
 import com.github.rcf.http.server.bean.HttpSeverBean;
 import io.netty.buffer.ByteBuf;
@@ -28,8 +29,14 @@ public class RcfHttpServerHandler extends ChannelInboundHandlerAdapter {
     private int timeout;
 
 
-    public RcfHttpServerHandler() {
+    private int threadCount;
+
+    private CountableThreadPool threadPool;
+
+    public RcfHttpServerHandler(int threadCount) {
         super();
+        this.threadCount = threadCount;
+        threadPool = new CountableThreadPool(threadCount);
     }
 
     @Override
@@ -42,8 +49,28 @@ public class RcfHttpServerHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg)
             throws Exception {
 
-        handleRequestWithsingleThread(ctx, msg); //可以考虑使用线程池，多线程处理
+          threadPool.execute(new HttpServerHandlerRunnable(ctx,msg));
 
+    }
+
+
+
+    private  class  HttpServerHandlerRunnable implements Runnable{
+
+        private  ChannelHandlerContext ctx;
+
+        private Object obj ;
+
+        public HttpServerHandlerRunnable(ChannelHandlerContext ctx,Object obj){
+            super();
+            this.ctx = ctx;
+            this.obj = obj;
+        }
+
+        @Override
+        public void run() {
+            handleRequestWithsingleThread(ctx, obj);
+        }
     }
 
 
@@ -85,14 +112,14 @@ public class RcfHttpServerHandler extends ChannelInboundHandlerAdapter {
 
                 }
                 if (message instanceof LastHttpContent){
-                    RpcServiceRouteMessage rpcRouteInfo=  RcfRpcServerHandlerFactory.getHttpServerHandler().isRouteInfos(url, httpType, map);
+                    RpcServiceRouteMessage rpcRouteInfo = RcfRpcServerHandlerFactory.getHttpServerHandler().isRouteInfos(url, httpType, map);
                     if(rpcRouteInfo==null||rpcRouteInfo.getRoute()==null){
                         DefaultHttpResponse response=getDefaultHttpResponse(404, null);
                         serverBean=new HttpSeverBean(response, null,keepAlive);
                         writeResponse(ctx, serverBean);
                         return;
                     }else{
-                        DefaultHttpResponse response=getDefaultHttpResponse(200, rpcRouteInfo.getReturnType());
+                        DefaultHttpResponse response = getDefaultHttpResponse(200, rpcRouteInfo.getReturnType());
                         Object result = RcfRpcServerHandlerFactory.getHttpServerHandler().methodInvoke(rpcRouteInfo);
                         if(result==null){
                             serverBean=new HttpSeverBean(response, null,keepAlive);

@@ -1,4 +1,4 @@
-package com.github.rcf.core.loadBlance;
+package com.github.rcf.core.loadBlance.impl;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
