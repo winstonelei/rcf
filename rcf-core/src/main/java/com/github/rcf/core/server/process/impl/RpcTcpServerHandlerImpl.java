@@ -17,6 +17,7 @@ import java.util.Map;
 /**
  * @author winstone
  * 服务端处理请求类
+ *
  */
 public class RpcTcpServerHandlerImpl extends AbstractRcfRpcTcpServerHandler {
 	
@@ -95,7 +96,7 @@ public class RpcTcpServerHandlerImpl extends AbstractRcfRpcTcpServerHandler {
 			}
 			method.setAccessible(true);
 
-			LOGGER.error("请求结果返回值处理后的结果="+method.invoke(rpcServerBean.getObject(), requestObjects));
+			//LOGGER.error("请求结果返回值处理后的结果="+method.invoke(rpcServerBean.getObject(), requestObjects));
 
 			responseWrapper.setResponse(method.invoke(rpcServerBean.getObject(), requestObjects));
 

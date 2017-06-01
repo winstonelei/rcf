@@ -45,5 +45,11 @@ public interface RcfRpcClientFactory {
      */
     public void removeRpcClient(String key);
 
+
+    /**
+     * 是否包含客户端
+     * @param key
+     * @return
+     */
     public boolean containClient(String key);
 }

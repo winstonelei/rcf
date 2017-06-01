@@ -81,13 +81,13 @@ public class RcfTcpHandler extends ChannelInboundHandlerAdapter {
      * @param message
      */
     private void handleRequestWithSingleThread(final ChannelHandlerContext ctx,  Object message){
-        RcfResponse rocketRPCResponse = null;
+        RcfResponse rcfResponse = null;
         try{
             RcfRequest request = (RcfRequest) message;
-            rocketRPCResponse = RcfRpcServerHandlerFactory
+            rcfResponse = RcfRpcServerHandlerFactory
                     .getTcpServerHandler().handleRequest(request, codecType);
             if(ctx.channel().isOpen()){
-                ChannelFuture wf = ctx.channel().writeAndFlush(rocketRPCResponse);
+                ChannelFuture wf = ctx.channel().writeAndFlush(rcfResponse);
                 wf.addListener(new ChannelFutureListener() {
                     public void operationComplete(ChannelFuture future) throws Exception {
                         if (!future.isSuccess()) {

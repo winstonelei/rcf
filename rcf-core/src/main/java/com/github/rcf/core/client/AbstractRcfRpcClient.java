@@ -4,6 +4,8 @@ import com.github.rcf.core.bean.RcfRequest;
 import com.github.rcf.core.bean.RcfResponse;
 import com.github.rcf.core.serializable.RcfCodes;
 import com.github.rcf.core.util.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -12,6 +14,8 @@ import java.util.concurrent.TimeUnit;
  * Created by winstone on 2017/5/29 0029.
  */
 public abstract class AbstractRcfRpcClient implements  RcfRpcClient{
+
+    private static final Log LOGGER = LogFactory.getLog(AbstractRcfRpcClient.class);
 
     @Override
     public Object invokeImpl(String targetInstanceName, String methodName,
@@ -29,14 +33,14 @@ public abstract class AbstractRcfRpcClient implements  RcfRpcClient{
 
 
 
-    private Object invokeImplIntern(RcfRequest rocketRPCRequest) throws Exception {
+    private Object invokeImplIntern(RcfRequest rcfRPCRequest) throws Exception {
         long beginTime = System.currentTimeMillis();
         LinkedBlockingQueue<Object> responseQueue = new LinkedBlockingQueue<Object>(1);
-        getClientFactory().putResponse(rocketRPCRequest.getId(), responseQueue);
+        getClientFactory().putResponse(rcfRPCRequest.getId(), responseQueue);
         RcfResponse rcfResponse = null;
         try {
 
-            sendRequest(rocketRPCRequest);
+            sendRequest(rcfRPCRequest);
 
         }catch (Exception e) {
             rcfResponse = null;
@@ -46,21 +50,22 @@ public abstract class AbstractRcfRpcClient implements  RcfRpcClient{
         try {
 
             result = responseQueue.poll(
-                    rocketRPCRequest.getTimeout() - (System.currentTimeMillis() - beginTime),
+                    rcfRPCRequest.getTimeout() - (System.currentTimeMillis() - beginTime),
                     TimeUnit.MILLISECONDS);
-            System.out.println("pool时间:"+(System.currentTimeMillis() - beginTime));
+           //   LOGGER.error("pool时间:"+(System.currentTimeMillis() - beginTime));
+
         }finally{
-            getClientFactory().removeResponse(rocketRPCRequest.getId());
+            getClientFactory().removeResponse(rcfRPCRequest.getId());
         }
-        if(result==null&&(System.currentTimeMillis() - beginTime)<=rocketRPCRequest.getTimeout()){//返回结果集为null
-            rcfResponse =new RcfResponse(rocketRPCRequest.getId(), rocketRPCRequest.getCodecType());
-        }else if(result==null&&(System.currentTimeMillis() - beginTime)>rocketRPCRequest.getTimeout()){//结果集超时
+        if(result==null&&(System.currentTimeMillis() - beginTime)<=rcfRPCRequest.getTimeout()){//返回结果集为null
+            rcfResponse =new RcfResponse(rcfRPCRequest.getId(), rcfRPCRequest.getCodecType());
+        }else if(result==null&&(System.currentTimeMillis() - beginTime)>rcfRPCRequest.getTimeout()){//结果集超时
             String errorMsg = "receive response timeout("
-                    + rocketRPCRequest.getTimeout() + " ms),server is: "
+                    + rcfRPCRequest.getTimeout() + " ms),server is: "
                     + getServerIP() + ":" + getServerPort()
-                    + " request id is:" + rocketRPCRequest.getId();
-           // LOGGER.error(errorMsg);
-            rcfResponse=new RcfResponse(rocketRPCRequest.getId(), rocketRPCRequest.getCodecType());
+                    + " request id is:" + rcfRPCRequest.getId();
+            LOGGER.error(errorMsg);
+            rcfResponse=new RcfResponse(rcfRPCRequest.getId(), rcfRPCRequest.getCodecType());
             rcfResponse.setException( new Throwable(errorMsg));
         }else if(result!=null){
             rcfResponse = (RcfResponse) result;
@@ -86,16 +91,14 @@ public abstract class AbstractRcfRpcClient implements  RcfRpcClient{
                 }
             }
         }catch(Exception e){
-          //  LOGGER.error("Deserialize response object error", e);
             throw new Exception("Deserialize response object error", e);
         }
 
         if (!StringUtils.isNullOrEmpty(rcfResponse.getException())) {
             Throwable t = rcfResponse.getException();
-            //t.fillInStackTrace();
             String errorMsg = "server error,server is: " + getServerIP()
                     + ":" + getServerPort() + " request id is:"
-                    + rocketRPCRequest.getId();
+                    + rcfRPCRequest.getId();
             return null;
         }
 
