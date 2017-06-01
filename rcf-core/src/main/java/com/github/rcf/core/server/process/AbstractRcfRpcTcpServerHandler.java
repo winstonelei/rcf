@@ -12,6 +12,6 @@ import com.github.rcf.core.bean.RcfResponse;
  */
 public abstract class AbstractRcfRpcTcpServerHandler implements RpcServerHandler {
 
-	public abstract RcfResponse handleRequest(RcfRequest request, int codecType, int procotolType );
+	public abstract RcfResponse handleRequest(RcfRequest request, int codecType);
 
 }

@@ -27,7 +27,6 @@ public class DemoServiceImpl implements IDemoService {
 	public String sayDemo(String params) {
 		long start1 = System.currentTimeMillis();
 
-		// 163网上海股票代码为06xxxxx,params为一个<4000整数
 		String code = "06";
 		for (int i = 5; i > params.length(); i--) {
 			code += "0";
@@ -45,8 +44,6 @@ public class DemoServiceImpl implements IDemoService {
 
 	@Override
 	public String getParam(String params) {
-		// TODO Auto-generated method stub
-		// LOGGER.info("getParam params:"+params);
 		return "from server:" + params;
 	}
 

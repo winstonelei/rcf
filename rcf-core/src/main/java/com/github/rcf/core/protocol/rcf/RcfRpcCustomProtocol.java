@@ -15,13 +15,7 @@ public class RcfRpcCustomProtocol {
     public static final byte CURRENT_VERSION = (byte)1;
 
     public static RpcByteBuffer encode(Object message,RpcByteBuffer bytebufferWrapper) throws Exception {
-        Integer type = 0;
-        if(message instanceof RcfRequest){
-            type = ((RcfRequest)message).getProtocolType();
-        }else if(message instanceof RcfResponse){
-            type = ((RcfResponse)message).getProtocolType();
-        }
-        RcfProtocol protocol =  RcfProtocolFactory.getProtocol(type);
+        RcfProtocol protocol =  RcfProtocolFactory.getProtocol();
         return protocol.encode(message, bytebufferWrapper);
     }
 
@@ -34,7 +28,7 @@ public class RcfRpcCustomProtocol {
         int version = wrapper.readByte();
         if(version == 1){
             int type = wrapper.readByte();
-            RcfProtocol protocol = RcfProtocolFactory.getProtocol(type);
+            RcfProtocol protocol = RcfProtocolFactory.getProtocol();
             if(protocol == null){
                 throw new Exception("Unsupport protocol type: "+type);
             }

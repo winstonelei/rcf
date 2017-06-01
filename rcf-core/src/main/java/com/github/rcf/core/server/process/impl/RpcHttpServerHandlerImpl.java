@@ -12,7 +12,6 @@ import java.util.Map;
  */
 public class RpcHttpServerHandlerImpl extends AbstractRcfRpcHttpServerHandler {
 
-    public static final int TYPE = 0;
 
     @Override
     public RpcServiceRouteMessage isRouteInfos(String route, String methodType, Map<String, Object> params) throws Exception {
@@ -30,7 +29,6 @@ public class RpcHttpServerHandlerImpl extends AbstractRcfRpcHttpServerHandler {
             RcfHttpBean rcfHttpBean = (RcfHttpBean) instance;
              RcfRpcRouteServiceFactory.getIRcfRpcRouteService().registerProcessor(instanceName,rcfHttpBean.getObject(),
                     rcfHttpBean.getHttpType(),rcfHttpBean.getReturnType());
-
         }
     }
 

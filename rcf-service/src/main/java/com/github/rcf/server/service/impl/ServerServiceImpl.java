@@ -15,21 +15,15 @@ public class ServerServiceImpl implements IserverService {
 
     private ZkClient client;
 
-    public static final int TYPE = 0;
-
     @Override
     public void close() throws Exception{
-        // TODO Auto-generated method stub
         client.close();
     }
 
-    /* (non-Javadoc)
-     * @see com.cross.plateform.common.rpc.service.server.ICommonServiceServer#connectZookeeper(java.lang.String, int)
-     */
     @Override
     public void connectZookeeper(String server, int timeout) throws Exception {
         Config config = new Config();
-        config.setRegistryAddress("121.40.129.155:2181");
+        config.setRegistryAddress(server);
         config.setInvokeTimeoutMillis(timeout);
         zookeeperTransporter = new CuratorZookeeperTransporter();
         client = zookeeperTransporter.connect(config);
@@ -37,7 +31,7 @@ public class ServerServiceImpl implements IserverService {
 
     @Override
     public void registerServer(String group, String server) throws Exception{
-        client.create("/" + group, group, false, true);
+        //client.create("/" + group, group, false, true);
         client.create("/" + group + "/"+server, server,true,true);
     }
 

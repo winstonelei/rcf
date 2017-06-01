@@ -20,8 +20,6 @@ public class RpcRegistery implements InitializingBean, DisposableBean {
 
     private int timeout;
 
-    private int procotolType;//协议名称
-
     private int codecType;//编码类型
 
     private String group;//组
@@ -29,20 +27,17 @@ public class RpcRegistery implements InitializingBean, DisposableBean {
     private int threadCount;//线程数
     @Override
     public void destroy() throws Exception {
-        // TODO Auto-generated method stub
         ServerServiceApi.getInstance().close();
         RcfTcpServer.getInstance().stop();//停止
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        // TODO Auto-generated method stub
         if(port==0){
             throw new Exception("parameter port can not be null");
         }
         ServerServiceApi.getInstance().registerService(group, getLocalhost());
         RcfTcpServer.getInstance().setCodecType(codecType);
-        RcfTcpServer.getInstance().setProcotolType(procotolType);
         RcfTcpServer.getInstance().setThreadCount(threadCount);
 
         RcfTcpServer.getInstance().start(port,timeout);
@@ -60,24 +55,15 @@ public class RpcRegistery implements InitializingBean, DisposableBean {
     public void setPort(int port) {
         this.port = port;
     }
+
     public int getTimeout() {
         return timeout;
     }
+
     public void setTimeout(int timeout) {
         this.timeout = timeout;
     }
-    /**
-     * @return the procotolType
-     */
-    public int getProcotolType() {
-        return procotolType;
-    }
-    /**
-     * @param procotolType the procotolType to set
-     */
-    public void setProcotolType(int procotolType) {
-        this.procotolType = procotolType;
-    }
+
     /**
      * @return the codecType
      */

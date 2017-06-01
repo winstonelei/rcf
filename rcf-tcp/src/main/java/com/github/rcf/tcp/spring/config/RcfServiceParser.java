@@ -16,7 +16,6 @@ public class RcfServiceParser implements BeanDefinitionParser {
 
     @Override
     public BeanDefinition parse(Element element, ParserContext parserContext) {
-        // TODO Auto-generated method stub
         String interfacename = element.getAttribute("interfacename");
         String ref=element.getAttribute("ref");
         String filterRef=element.getAttribute("filterRef");

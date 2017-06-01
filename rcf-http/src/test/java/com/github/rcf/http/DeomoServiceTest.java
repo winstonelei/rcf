@@ -11,6 +11,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class DeomoServiceTest {
 	
 	public static void main(String[] args) {
-		new ClassPathXmlApplicationContext("CommonRpcHttpServer.xml");
+		new ClassPathXmlApplicationContext("RcfRpcHttpServer.xml");
 	}
 }

@@ -16,11 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DefualtRpcProtocolImpl implements RcfProtocol {
+public class DefaultRpcProtocolImpl implements RcfProtocol {
 	public static final int TYPE = 1;
 
 	private static final Log LOGGER = LogFactory
-			.getLog(DefualtRpcProtocolImpl.class);
+			.getLog(DefaultRpcProtocolImpl.class);
 	
 	private static final int REQUEST_HEADER_LEN = 1 * 6 + 5 * 4 ;
 
@@ -36,7 +36,6 @@ public class DefualtRpcProtocolImpl implements RcfProtocol {
 	@Override
 	public RpcByteBuffer encode(Object message,
 								RpcByteBuffer bytebufferWrapper) throws Exception {
-		// TODO Auto-generated method stub
 		if (!(message instanceof RcfRequest)
 				&& !(message instanceof RcfResponse)) {
 			throw new Exception(
@@ -253,7 +252,7 @@ public class DefualtRpcProtocolImpl implements RcfProtocol {
 
 				RcfRequest rcfRPCRequest = new RcfRequest(
 						targetInstanceByte, methodNameByte, argTypes, args,
-						timeout, requestId, codecType, TYPE);
+						timeout, requestId, codecType);
 				
 				int messageLen = RcfRpcCustomProtocol.HEADER_LEN + REQUEST_HEADER_LEN
 						+ expectedLenInfoLen + expectedLen;
@@ -288,7 +287,7 @@ public class DefualtRpcProtocolImpl implements RcfProtocol {
 				wrapper.readBytes(bodyBytes);
 				
 				RcfResponse responseWrapper = new RcfResponse(
-						requestId, codecType, TYPE);
+						requestId, codecType);
 				responseWrapper.setResponse(bodyBytes);
 				responseWrapper.setResponseClassName(classNameBytes);
 				int messageLen = RcfRpcCustomProtocol.HEADER_LEN + RESPONSE_HEADER_LEN

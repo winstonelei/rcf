@@ -18,13 +18,11 @@ import java.util.*;
  */
 public class RcfRpcRouteServiceImpl implements IRcfRpcRouteService {
 	
-	public static final int TYPE = 0;
-	
-	private static List<RpcServiceRouteMessage> RpcServiceRouteMessages=new ArrayList<RpcServiceRouteMessage>();
+
+	private static List<RpcServiceRouteMessage> RpcServiceRouteMessages = new ArrayList<RpcServiceRouteMessage>();
 	
 	@Override
 	public RpcServiceRouteMessage isRouteInfos(String route, String methodType,Map<String, Object> params) throws Exception {
-		// TODO Auto-generated method stub
 		RpcServiceRouteMessage rpcRoute=null;
 		for(RpcServiceRouteMessage RpcServiceRouteMessage:RpcServiceRouteMessages){
 			if(RpcServiceRouteMessage.getRoute().equals(route)&&RpcServiceRouteMessage.getHttpType().equals(methodType)){
@@ -38,7 +36,6 @@ public class RcfRpcRouteServiceImpl implements IRcfRpcRouteService {
 
 	@Override
 	public Object methodInvoke(RpcServiceRouteMessage routeInfo) throws Exception {
-		// TODO Auto-generated method stub
 		Method[] mds = routeInfo.getMethods();
 		for(Method method:mds){
 			if (routeInfo.getMethod().equals(method.getName())) {
@@ -98,11 +95,6 @@ public class RcfRpcRouteServiceImpl implements IRcfRpcRouteService {
 	}
 	
 	private Object getResult(Method method,Object object,Object... args) throws Exception{
-//		if (args.length > 0) {
-//			return method.invoke(object, args);// 执行
-//		} else {
-//			return method.invoke(object, null);
-//		}
 		return method.invoke(object, args);// 执行
 	}
 
@@ -131,7 +123,6 @@ public class RcfRpcRouteServiceImpl implements IRcfRpcRouteService {
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
 		RpcServiceRouteMessages.clear();
 	}
 

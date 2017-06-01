@@ -31,11 +31,6 @@ public class RcfReference implements FactoryBean, DisposableBean {
     private int codecType;
 
     /**
-     * 协议类型
-     */
-    private int protocolType;
-
-    /**
      * 组名
      */
     private String group;
@@ -46,21 +41,14 @@ public class RcfReference implements FactoryBean, DisposableBean {
         RcfTcpClientFactory.getInstance().stopClient();
     }
 
-    /* (non-Javadoc)
-     * @see org.springframework.beans.factory.FactoryBean#getObject()
-     */
+
     @Override
     public Object getObject() throws Exception {
-        // TODO Auto-generated method stub
-        return RcfClientProxy.getInstance().getProxyService(getObjectType(), timeout, codecType, protocolType, getObjectType().getName(), group);
+        return RcfClientProxy.getInstance().getProxyService(getObjectType(), timeout, codecType, getObjectType().getName(), group);
     }
 
-    /* (non-Javadoc)
-     * @see org.springframework.beans.factory.FactoryBean#getObjectType()
-     */
     @Override
     public Class<?> getObjectType() {
-        // TODO Auto-generated method stub
         try {
             if (StringUtils.isNullOrEmpty(interfacename)){
                 LOGGER.warn("interfacename is null");
@@ -70,15 +58,12 @@ public class RcfReference implements FactoryBean, DisposableBean {
             }
 
         } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
             LOGGER.error("spring 解析失败", e);
         }
         return null;
     }
 
-    /* (non-Javadoc)
-     * @see org.springframework.beans.factory.FactoryBean#isSingleton()
-     */
+
     @Override
     public boolean isSingleton() {
         // TODO Auto-generated method stub
@@ -125,20 +110,6 @@ public class RcfReference implements FactoryBean, DisposableBean {
      */
     public void setCodecType(int codecType) {
         this.codecType = codecType;
-    }
-
-    /**
-     * @return the protocolType
-     */
-    public int getProtocolType() {
-        return protocolType;
-    }
-
-    /**
-     * @param protocolType the protocolType to set
-     */
-    public void setProtocolType(int protocolType) {
-        this.protocolType = protocolType;
     }
 
     /**

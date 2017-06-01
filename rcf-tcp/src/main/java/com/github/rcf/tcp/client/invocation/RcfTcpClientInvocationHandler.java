@@ -11,9 +11,8 @@ public class RcfTcpClientInvocationHandler extends AbstarctRcfInvocationHandler 
 
     public RcfTcpClientInvocationHandler(String group,
                                                int timeout,  String targetInstanceName,
-                                               int codecType, int protocolType) {
-        super(group, timeout, targetInstanceName, codecType,
-                protocolType);
+                                               int codecType) {
+        super(group, timeout, targetInstanceName, codecType);
     }
 
     public RcfRpcClientFactory getClientFactory() {

@@ -20,19 +20,15 @@ public class NamedThreadFactory implements ThreadFactory {
     final boolean isDaemon;
     
     public NamedThreadFactory() {
-        this("rocketrpc");
+        this("rcfrpc");
     }
     
     public NamedThreadFactory(String name) {
         this(name, false);
     }
     
-	/* (non-Javadoc)
-	 * @see java.util.concurrent.ThreadFactory#newThread(java.lang.Runnable)
-	 */
 	@Override
 	public Thread newThread(Runnable r) {
-		// TODO Auto-generated method stub
 		 Thread t = new Thread(group, r, namePrefix
 	                + threadNumber.getAndIncrement(), 0);
 	        t.setDaemon(isDaemon);

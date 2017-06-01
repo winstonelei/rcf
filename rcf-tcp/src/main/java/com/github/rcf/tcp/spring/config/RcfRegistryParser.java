@@ -19,7 +19,6 @@ public class RcfRegistryParser  implements BeanDefinitionParser {
         String ip = element.getAttribute("ip");
         int port=Integer.parseInt(element.getAttribute("port"));
         int timeout=Integer.parseInt(element.getAttribute("timeout"));
-        int procotolType=Integer.parseInt(element.getAttribute("procotolType"));
         int codecType=Integer.parseInt(element.getAttribute("codecType"));
         int threadCount=Integer.parseInt(element.getAttribute("threadCount"));
         String group=element.getAttribute("group");
@@ -30,7 +29,6 @@ public class RcfRegistryParser  implements BeanDefinitionParser {
         beanDefinition.getPropertyValues().addPropertyValue("port", port);
         beanDefinition.getPropertyValues().addPropertyValue("timeout", timeout);
         beanDefinition.getPropertyValues().addPropertyValue("group", group);
-        beanDefinition.getPropertyValues().addPropertyValue("procotolType", procotolType);
         beanDefinition.getPropertyValues().addPropertyValue("codecType", codecType);
         beanDefinition.getPropertyValues().addPropertyValue("threadCount", threadCount);
 

@@ -34,6 +34,8 @@ public interface IRcfRpcRouteService {
      */
     public void registerProcessor(String projectname, Object instance,String httpType,String returnType);
 
+
+
     public void clear();
     
 }

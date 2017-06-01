@@ -21,16 +21,13 @@ public class RcfResponse implements Serializable {
 
     private int codecType = RcfCodes.JAVA_CODEC;
 
-    private int protocolType;
-
     private int messageLen;
 
     private byte[] responseClassName;
 
-    public RcfResponse(int requestId,int codecType,int protocolType){
+    public RcfResponse(int requestId,int codecType){
         this.requestId = requestId;
         this.codecType = codecType;
-        this.protocolType = protocolType;
     }
 
     public int getMessageLen() {
@@ -39,10 +36,6 @@ public class RcfResponse implements Serializable {
 
     public void setMessageLen(int messageLen) {
         this.messageLen = messageLen;
-    }
-
-    public int getProtocolType() {
-        return protocolType;
     }
 
     public int getCodecType() {

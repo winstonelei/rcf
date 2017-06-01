@@ -26,7 +26,6 @@ public class RcfTcpClientHandler  extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg)
             throws Exception {
         try{
-
             if (msg instanceof RcfResponse) {
                 RcfResponse response = (RcfResponse) msg;
                 if (isDebugEnabled) {

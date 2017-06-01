@@ -35,8 +35,6 @@ public class RcfRequest implements Serializable {
 
     private int id ;
 
-    private int protocolType;
-
     private int codecType = RcfCodes.JAVA_CODEC;
 
     private int messageLen;
@@ -44,12 +42,12 @@ public class RcfRequest implements Serializable {
     private static final AtomicInteger requestIdSeq = new AtomicInteger();
 
     public RcfRequest(byte[] targetInstanceName,byte[] methodName,byte[][] argTypes,
-                            Object[] requestObjects,int timeout,int codecType,int protocolType){
-        this(targetInstanceName,methodName,argTypes,requestObjects,timeout,get(),codecType,protocolType);
+                            Object[] requestObjects,int timeout,int codecType){
+        this(targetInstanceName,methodName,argTypes,requestObjects,timeout,get(),codecType);
     }
 
     public RcfRequest(byte[] targetInstanceName,byte[] methodName,byte[][] argTypes,
-                            Object[] requestObjects,int timeout,int id,int codecType,int protocolType){
+                            Object[] requestObjects,int timeout,int id,int codecType){
         this.requestObjects = requestObjects;
         this.id = id;
         this.timeout = timeout;
@@ -57,8 +55,6 @@ public class RcfRequest implements Serializable {
         this.methodName = methodName;
         this.argTypes = argTypes;
         this.codecType = codecType;
-        this.protocolType = protocolType;
-
     }
 
 
@@ -72,10 +68,6 @@ public class RcfRequest implements Serializable {
     }
 
 
-
-    public int getProtocolType() {
-        return protocolType;
-    }
 
     public int getCodecType() {
         return codecType;

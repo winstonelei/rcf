@@ -22,12 +22,11 @@ public class RcfClientProxy implements ClientProxy {
 
 
     @Override
-    public <T> T getProxyService(Class<T> clazz, int timeout, int codecType,
-                                 int protocolType, String targetInstanceName, String group) {
+    public <T> T getProxyService(Class<T> clazz, int timeout, int codecType, String targetInstanceName, String group) {
         return (T) Proxy.newProxyInstance(
                 Thread.currentThread().getContextClassLoader(),
                 new Class[] { clazz },
                 new RcfTcpClientInvocationHandler(group, timeout,
-                        targetInstanceName, codecType, protocolType));
+                        targetInstanceName, codecType));
     }
 }

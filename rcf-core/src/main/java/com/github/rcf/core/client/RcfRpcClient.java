@@ -9,7 +9,7 @@ public interface RcfRpcClient {
 
 
     public Object invokeImpl(String targetInstanceName, String methodName,
-                             String[] argTypes, Object[] args, int timeout, int codecType, int protocolType)
+                             String[] argTypes, Object[] args, int timeout, int codecType)
             throws Exception;
     /**
      * server address

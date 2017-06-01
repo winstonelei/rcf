@@ -26,7 +26,6 @@ public class RcfApplication implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        // TODO Auto-generated method stub
         if(StringUtils.isNullOrEmpty(address)){
             throw new RuntimeException("address   can not be null or empty");
         }

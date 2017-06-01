@@ -51,7 +51,6 @@ public class RcfService implements ApplicationContextAware, ApplicationListener 
 
     @Override
     public void onApplicationEvent(ApplicationEvent event) {
-        // TODO Auto-generated method stub
       /*  if(StringUtils.isNullOrEmpty(filterRef)||!(applicationContext.getBean(filterRef) instanceof RpcFilter)){//为空
             CommonRpcTcpServer.getInstance().registerProcessor(interfacename, applicationContext.getBean(ref),null);
         }else{*/
@@ -62,7 +61,6 @@ public class RcfService implements ApplicationContextAware, ApplicationListener 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext)
             throws BeansException {
-        // TODO Auto-generated method stub
         this.applicationContext=applicationContext;
     }
 

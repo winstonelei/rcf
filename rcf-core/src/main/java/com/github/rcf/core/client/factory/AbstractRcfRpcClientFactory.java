@@ -20,8 +20,7 @@ public abstract  class AbstractRcfRpcClientFactory implements RcfRpcClientFactor
 
     protected static Map<String, AbstractRcfRpcClient> rpcClients = new ConcurrentHashMap<String, AbstractRcfRpcClient>();
 
-    protected static ConcurrentHashMap<Integer, LinkedBlockingQueue<Object>> responses =
-            new ConcurrentHashMap<Integer, LinkedBlockingQueue<Object>>();
+    protected static ConcurrentHashMap<Integer, LinkedBlockingQueue<Object>> responses =  new ConcurrentHashMap<Integer, LinkedBlockingQueue<Object>>();
 
     @Override
     public RcfRpcClient getClient(String host, int port) throws Exception {
@@ -47,7 +46,6 @@ public abstract  class AbstractRcfRpcClientFactory implements RcfRpcClientFactor
 
     @Override
     public void receiveResponse(RcfResponse response) throws Exception {
-        // TODO Auto-generated method stub
         if (!responses.containsKey(response.getRequestId())) {
             LOGGER.error("give up the response,request id is:" + response.getRequestId() + ",maybe because timeout!");
             return;

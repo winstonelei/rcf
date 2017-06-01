@@ -67,7 +67,7 @@ public class RcfRpcClientImpl extends AbstractRcfRpcClient {
                     }
                     LOGGER.error(errorMsg);
                     RcfResponse response =
-                            new RcfResponse(rcfRequest.getId(), rcfRequest.getCodecType(), rcfRequest.getProtocolType());
+                            new RcfResponse(rcfRequest.getId(), rcfRequest.getCodecType());
                     response.setException(new Exception(errorMsg));
                     getClientFactory().receiveResponse(response);
                 }

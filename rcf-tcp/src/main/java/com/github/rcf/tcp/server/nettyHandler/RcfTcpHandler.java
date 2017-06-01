@@ -28,23 +28,17 @@ public class RcfTcpHandler extends ChannelInboundHandlerAdapter {
 
     private static final Log LOGGER = LogFactory.getLog(RcfTcpHandler.class);
 
-    private ThreadPoolExecutor threadPoolExecutor;
 
     private CountableThreadPool threadPool;
 
     private int port;
 
-    private int procotolType;//协议名称
-
     private int codecType;//编码类型
 
-    public RcfTcpHandler(int threadCount, int port,
-                                     int procotolType, int codecType) {
+    public RcfTcpHandler(int threadCount, int port, int codecType) {
         super();
         this.port = port;
-        this.procotolType = procotolType;
         this.codecType = codecType;
-        threadPoolExecutor= (ThreadPoolExecutor) Executors.newFixedThreadPool(threadCount);
         threadPool = new CountableThreadPool(threadCount);
 
     }
@@ -52,7 +46,7 @@ public class RcfTcpHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         LOGGER.error("远程主机ip和端口="+ctx.channel().remoteAddress());
-        RcfServiceFactory.getIserverService().registerClient(getLocalhost(), ctx.channel().remoteAddress().toString());
+    //    RcfServiceFactory.getIserverService().registerClient(getLocalhost(), ctx.channel().remoteAddress().toString());
     }
 
     @Override
@@ -65,7 +59,7 @@ public class RcfTcpHandler extends ChannelInboundHandlerAdapter {
             throws Exception {
         if (!(e.getCause() instanceof IOException)) {
             // only log
-         //   LOGGER.error("catch some exception not IOException", e);
+            LOGGER.error("catch some exception not IOException", e);
         }
         ctx.channel().close();
     }
@@ -73,17 +67,16 @@ public class RcfTcpHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg)
             throws Exception {
-        // TODO Auto-generated method stub
-
         if (!(msg instanceof RcfRequest) ) {
-           // LOGGER.error("receive message error,only support RequestWrapper");
+            LOGGER.error("receive message error,only support RequestWrapper");
             throw new Exception(
                     "receive message error,only support RequestWrapper || List");
         }
-        //threadPool.execute(new ServerHandlerRunnable(ctx,msg));
-        threadPoolExecutor.submit(new ServerHandlerRunnable(ctx, msg));
+        threadPool.execute(new ServerHandlerRunnable(ctx,msg));
+
     }
     /**
+     *
      * @param ctx
      * @param message
      */
@@ -92,10 +85,8 @@ public class RcfTcpHandler extends ChannelInboundHandlerAdapter {
         try{
             RcfRequest request = (RcfRequest) message;
             rocketRPCResponse = RcfRpcServerHandlerFactory
-                    .getTcpServerHandler().handleRequest(request, codecType,
-                            procotolType);
+                    .getTcpServerHandler().handleRequest(request, codecType);
             if(ctx.channel().isOpen()){
-                LOGGER.error("11212remoteaddredss="+ctx.channel().remoteAddress());
                 ChannelFuture wf = ctx.channel().writeAndFlush(rocketRPCResponse);
                 wf.addListener(new ChannelFutureListener() {
                     public void operationComplete(ChannelFuture future) throws Exception {
@@ -119,7 +110,7 @@ public class RcfTcpHandler extends ChannelInboundHandlerAdapter {
 
     private void sendErrorResponse(final ChannelHandlerContext ctx, final RcfRequest request,String errorMessage) {
         RcfResponse commonRpcResponse =
-                new RcfResponse(request.getId(), request.getCodecType(), request.getProtocolType());
+                new RcfResponse(request.getId(), request.getCodecType());
         commonRpcResponse.setException(new Exception(errorMessage));
         ChannelFuture wf = ctx.channel().writeAndFlush(commonRpcResponse);
         wf.addListener(new ChannelFutureListener() {
@@ -137,7 +128,6 @@ public class RcfTcpHandler extends ChannelInboundHandlerAdapter {
             String ip = InetAddress.getLocalHost().getHostAddress();
             return ip+":"+port;
         } catch (UnknownHostException e) {
-            // TODO Auto-generated catch block
             throw new RuntimeException("无法获取本地Ip",e);
         }
 
@@ -163,7 +153,6 @@ public class RcfTcpHandler extends ChannelInboundHandlerAdapter {
 
         @Override
         public void run() {
-            // TODO Auto-generated method stub
             handleRequestWithSingleThread(ctx, message);
         }
 

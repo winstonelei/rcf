@@ -15,9 +15,9 @@ import com.github.rcf.core.server.process.impl.RpcTcpServerHandlerImpl;
  */
 public class RcfRpcServerHandlerFactory {
 	
-	private static AbstractRcfRpcTcpServerHandler tcpServerHandler  = new RpcTcpServerHandlerImpl();//= new AbstractRcfRpcTcpServerHandler();//AbstractRpcTcpServerHandler[1];
+	private static AbstractRcfRpcTcpServerHandler tcpServerHandler  = new RpcTcpServerHandlerImpl();
 	
-    private static AbstractRcfRpcHttpServerHandler httpServerHandler = new RpcHttpServerHandlerImpl();//AbstractRpcHttpServerHandler[2];
+    private static AbstractRcfRpcHttpServerHandler httpServerHandler = new RpcHttpServerHandlerImpl();
 	
 
 	public static AbstractRcfRpcTcpServerHandler getTcpServerHandler(){

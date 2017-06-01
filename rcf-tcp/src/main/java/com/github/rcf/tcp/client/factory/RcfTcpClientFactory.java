@@ -37,8 +37,6 @@ public class RcfTcpClientFactory  extends AbstractRcfRpcClientFactory {
 
     private final Bootstrap bootstrap = new Bootstrap();
 
-    private final Timer timer = new Timer("ClientHouseKeepingService", true);
-
     private static AbstractRcfRpcClientFactory clientFactory = new RcfTcpClientFactory();
 
    public static AbstractRcfRpcClientFactory getInstance(){

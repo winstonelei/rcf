@@ -27,7 +27,6 @@ import java.util.concurrent.ThreadFactory;
  */
 public class RcfTcpServer  implements RcfRpcServer{
 
-
     private static final Log LOGGER = LogFactory.getLog(RcfTcpServer.class);
 
     private static final int PROCESSORS = Runtime.getRuntime().availableProcessors()*2;
@@ -36,15 +35,6 @@ public class RcfTcpServer  implements RcfRpcServer{
 
     private NioEventLoopGroup workerGroup;
 
-    private int procotolType;//协议名称
-
-    public int getProcotolType() {
-        return procotolType;
-    }
-
-    public void setProcotolType(int procotolType) {
-        this.procotolType = procotolType;
-    }
 
     public int getCodecType() {
         return codecType;
@@ -111,7 +101,7 @@ public class RcfTcpServer  implements RcfRpcServer{
                 pipeline.addLast("decoder", new RcfDecoderHandler());
                 pipeline.addLast("encoder", new RcfEncoderHandler());
                 pipeline.addLast("timeout",new IdleStateHandler(0, 0, 120));
-                pipeline.addLast("handler", new RcfTcpHandler(threadCount,port,procotolType,codecType));
+                pipeline.addLast("handler", new RcfTcpHandler(threadCount,port,codecType));
 
             }
 

@@ -20,8 +20,6 @@ import java.util.Map;
  */
 public class RpcTcpServerHandlerImpl extends AbstractRcfRpcTcpServerHandler {
 	
-	public static final int TYPE = 0;
-	
 	private static final Log LOGGER = LogFactory.getLog(RpcTcpServerHandlerImpl.class);
 	
 	private static Map<String, RpcServerBean> processors = new HashMap<String, RpcServerBean>();
@@ -30,7 +28,6 @@ public class RpcTcpServerHandlerImpl extends AbstractRcfRpcTcpServerHandler {
 
 	@Override
 	public void registerProcessor(String instanceName, Object instance) {
-		// TODO Auto-generated method stub
 		RpcServerBean filterServerBean=new RpcServerBean(instance);
 		processors.put(instanceName, filterServerBean);
 		Class<?> instanceClass = instance.getClass();
@@ -48,8 +45,8 @@ public class RpcTcpServerHandlerImpl extends AbstractRcfRpcTcpServerHandler {
 	}
 
 	@Override
-	public RcfResponse handleRequest(RcfRequest request, int codecType, int procotolType ) {
-		RcfResponse responseWrapper = new RcfResponse(request.getId(),codecType,procotolType);
+	public RcfResponse handleRequest(RcfRequest request, int codecType) {
+		RcfResponse responseWrapper = new RcfResponse(request.getId(),codecType);
 		String targetInstanceName = new String(request.getTargetInstanceName());
 		String methodName = new String(request.getMethodName());
 		byte[][] argTypeBytes  = request.getArgTypes();
@@ -111,7 +108,6 @@ public class RpcTcpServerHandlerImpl extends AbstractRcfRpcTcpServerHandler {
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
 		processors.clear();
 		cacheMethods.clear();
 	}

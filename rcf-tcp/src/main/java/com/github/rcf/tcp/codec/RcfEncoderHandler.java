@@ -13,7 +13,6 @@ public class RcfEncoderHandler extends MessageToByteEncoder<Object> {
     @Override
     protected void encode(ChannelHandlerContext ctx, Object message, ByteBuf out)
             throws Exception {
-        // TODO Auto-generated method stub
         RcfByteBuffer byteBufferWrapper = new RcfByteBuffer(ctx);
         RcfRpcCustomProtocol.encode(message, byteBufferWrapper);
         ctx.write(byteBufferWrapper.getBuffer());
