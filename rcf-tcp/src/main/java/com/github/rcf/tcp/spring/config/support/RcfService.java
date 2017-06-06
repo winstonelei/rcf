@@ -51,11 +51,7 @@ public class RcfService implements ApplicationContextAware, ApplicationListener 
 
     @Override
     public void onApplicationEvent(ApplicationEvent event) {
-      /*  if(StringUtils.isNullOrEmpty(filterRef)||!(applicationContext.getBean(filterRef) instanceof RpcFilter)){//为空
-            CommonRpcTcpServer.getInstance().registerProcessor(interfacename, applicationContext.getBean(ref),null);
-        }else{*/
-            RcfTcpServer.getInstance().registerProcessor(interfacename, applicationContext.getBean(ref));
-        //}
+        RcfTcpServer.getInstance().registerProcessor(interfacename, applicationContext.getBean(ref));
     }
 
     @Override
