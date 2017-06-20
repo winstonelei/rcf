@@ -44,7 +44,6 @@ public abstract  class AbstarctRcfInvocationHandler implements
     public Object invoke(Object proxy, Method method, Object[] args)
             throws Throwable {
         Set<InetSocketAddress> addresses = ClientServiceApi.getInstance().getServersByGroup(group);
-
         List<RouteServer> servers= SocketAddressUtil.getInetSocketAddress(addresses);
         //通过负载均衡算法实现服务端负载均衡
         LoadBalance loadBalance = LoadBalanceFactory.getLoadBalance();
@@ -55,9 +54,7 @@ public abstract  class AbstarctRcfInvocationHandler implements
         String methodName = method.getName();
         String[] argTypes = createParamSignature(method.getParameterTypes());
         Object result= client.invokeImpl(targetInstanceName, methodName, argTypes, args, timeout, codecType);
-        //System.out.println("得到结果="+result);
         System.out.println("得到的负载均衡服务端地址="+server.getAddress().getHostAddress()+",port:"+server.getPort());
-
         return result;
     }
 

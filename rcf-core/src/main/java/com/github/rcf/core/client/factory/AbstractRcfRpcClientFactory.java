@@ -15,12 +15,10 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public abstract  class AbstractRcfRpcClientFactory implements RcfRpcClientFactory {
 
-
     private static final Log LOGGER = LogFactory.getLog(AbstractRcfRpcClientFactory.class);
 
     protected static Map<String, AbstractRcfRpcClient> rpcClients = new ConcurrentHashMap<String, AbstractRcfRpcClient>();
 
-    protected static ConcurrentHashMap<Integer, LinkedBlockingQueue<Object>> responses =  new ConcurrentHashMap<Integer, LinkedBlockingQueue<Object>>();
 
     @Override
     public RcfRpcClient getClient(String host, int port) throws Exception {
@@ -34,44 +32,12 @@ public abstract  class AbstractRcfRpcClientFactory implements RcfRpcClientFactor
     protected abstract RcfRpcClient createClient(String targetIP, int targetPort) throws Exception;
 
 
-    @Override
-    public void putResponse(int key, LinkedBlockingQueue<Object> queue)
-            throws Exception {
-        responses.put(key, queue);
-    }
+
     /**
      * 停止客户端
      */
     public abstract void stopClient() throws Exception;
 
-    @Override
-    public void receiveResponse(RcfResponse response) throws Exception {
-        if (!responses.containsKey(response.getRequestId())) {
-            LOGGER.error("give up the response,request id is:" + response.getRequestId() + ",maybe because timeout!");
-            return;
-        }
-        try {
-            if(responses.containsKey(response.getRequestId())){
-                LinkedBlockingQueue<Object> queue = responses.get(response.getRequestId());
-                if (queue != null) {
-                    queue.put(response);
-                } else {
-                    LOGGER.warn("give up the response,request id is:"
-                            + response.getRequestId() + ",because queue is null");
-                }
-            }
-
-        } catch (InterruptedException e) {
-             LOGGER.error("put response error,request id is:" + response.getRequestId(), e);
-        }
-
-
-    }
-
-    @Override
-    public void removeResponse(int key) {
-        responses.remove(key);
-    }
 
     public void clearClients(){
         rpcClients.clear();
@@ -82,10 +48,6 @@ public abstract  class AbstractRcfRpcClientFactory implements RcfRpcClientFactor
         rpcClients.put(key, rpcClient);
     }
 
-    @Override
-    public boolean containClient(String key){
-        return rpcClients.containsKey(key);
-    }
 
     @Override
     public void removeRpcClient(String key) {
@@ -93,4 +55,7 @@ public abstract  class AbstractRcfRpcClientFactory implements RcfRpcClientFactor
             rpcClients.remove(key);
         }
     }
+
+
+
 }

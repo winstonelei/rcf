@@ -45,9 +45,22 @@ public class RpcTcpServerHandlerImpl extends AbstractRcfRpcTcpServerHandler {
 		}
 	}
 
+
+	public RcfResponse handleRequestWithCallable(RcfRequest request,RcfResponse response) {
+		response.setRequestId(request.getId());
+		response.setCodecType(request.getCodecType());
+		return this.getResonseWrapper(request,response);
+	}
+
+
 	@Override
 	public RcfResponse handleRequest(RcfRequest request, int codecType) {
 		RcfResponse responseWrapper = new RcfResponse(request.getId(),codecType);
+		responseWrapper = getResonseWrapper(request, responseWrapper);
+		return responseWrapper;
+	}
+
+	private RcfResponse getResonseWrapper(RcfRequest request, RcfResponse responseWrapper) {
 		String targetInstanceName = new String(request.getTargetInstanceName());
 		String methodName = new String(request.getMethodName());
 		byte[][] argTypeBytes  = request.getArgTypes();

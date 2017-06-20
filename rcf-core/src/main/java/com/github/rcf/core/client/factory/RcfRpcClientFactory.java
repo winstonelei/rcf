@@ -18,20 +18,6 @@ public interface RcfRpcClientFactory {
      * @param connectiontimeout  连接超时时间
      */
     public void startClient(int connectiontimeout);
-
-    public void putResponse(int key,LinkedBlockingQueue<Object> queue) throws Exception;
-    /**
-     * 接受消息
-     * @param response
-     * @throws Exception
-     */
-    public void receiveResponse(RcfResponse response) throws Exception;
-
-    /**
-     * 删除消息
-     * @param key
-     */
-    public void removeResponse(int key);
     /**
      *
      * @param key
@@ -46,10 +32,4 @@ public interface RcfRpcClientFactory {
     public void removeRpcClient(String key);
 
 
-    /**
-     * 是否包含客户端
-     * @param key
-     * @return
-     */
-    public boolean containClient(String key);
 }

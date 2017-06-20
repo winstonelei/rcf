@@ -14,4 +14,6 @@ public abstract class AbstractRcfRpcTcpServerHandler implements RpcServerHandler
 
 	public abstract RcfResponse handleRequest(RcfRequest request, int codecType);
 
+	public abstract RcfResponse handleRequestWithCallable(RcfRequest request,RcfResponse response);
+
 }

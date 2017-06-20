@@ -12,18 +12,21 @@ public class RcfResponse implements Serializable {
     private static final long serialVersionUID = 4590846966635080090L;
 
     private int requestId ;
-
     private Object response = null;
 
     private boolean isError = false;
 
     private Throwable exception = null;
 
+
+
     private int codecType = RcfCodes.JAVA_CODEC;
 
     private int messageLen;
 
     private byte[] responseClassName;
+
+    public RcfResponse(){}
 
     public RcfResponse(int requestId,int codecType){
         this.requestId = requestId;
@@ -75,4 +78,11 @@ public class RcfResponse implements Serializable {
         this.responseClassName = responseClassName;
     }
 
+    public void setRequestId(int requestId) {
+        this.requestId = requestId;
+    }
+
+    public void setCodecType(int codecType) {
+        this.codecType = codecType;
+    }
 }
