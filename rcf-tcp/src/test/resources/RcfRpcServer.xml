@@ -17,7 +17,7 @@
     <!--zk 注册中心地址  -->
     <rcfrpc:application id="rpcRegistryApplication" address="121.40.129.155:2181" flag="1" timeout="20000"></rcfrpc:application>
      
-    <rcfrpc:registry id="rpcRegistry" port="10012" timeout="20000"  codecType="1" group="rcf" threadCount="200"></rcfrpc:registry>
+    <rcfrpc:registry id="rpcRegistry" port="10011" timeout="20000"  codecType="1" group="rcf" threadCount="200"></rcfrpc:registry>
     
     <rcfrpc:service id="IDemoService"  interfacename="com.github.rcf.tcp.demo.service.IDemoService" ref="demoService" ></rcfrpc:service>
 

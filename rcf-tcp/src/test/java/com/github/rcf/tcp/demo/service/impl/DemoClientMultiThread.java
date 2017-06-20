@@ -19,12 +19,13 @@ public class DemoClientMultiThread {
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
                 "RcfRpcClient.xml");
+
         final IDemoService demoService = (IDemoService) context
                 .getBean("demoServiceClient");
 
         long time1 = System.currentTimeMillis();
 
-        int threadCount = 50;
+        int threadCount = 20;
 
         final CountDownLatch countDownLatch = new CountDownLatch(threadCount);
 
@@ -51,6 +52,6 @@ public class DemoClientMultiThread {
         System.out.println("完成时间:" + (end1 - time1) + ",平均时间："
                 + ((double) (end1 - time1) / (double) (threadCount)));
 
-
+        context.destroy();
     }
 }

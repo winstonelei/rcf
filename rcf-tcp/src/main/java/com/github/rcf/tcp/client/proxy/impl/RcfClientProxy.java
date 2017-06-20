@@ -10,13 +10,14 @@ import java.lang.reflect.Proxy;
  */
 public class RcfClientProxy implements ClientProxy {
 
-    public RcfClientProxy(){}
+    public RcfClientProxy() {
+    }
 
-    private static class SingletonHolder{
+    private static class SingletonHolder {
         static final RcfClientProxy instance = new RcfClientProxy();
     }
 
-    public static RcfClientProxy getInstance(){
+    public static RcfClientProxy getInstance() {
         return SingletonHolder.instance;
     }
 
@@ -25,8 +26,13 @@ public class RcfClientProxy implements ClientProxy {
     public <T> T getProxyService(Class<T> clazz, int timeout, int codecType, String targetInstanceName, String group) {
         return (T) Proxy.newProxyInstance(
                 Thread.currentThread().getContextClassLoader(),
-                new Class[] { clazz },
+                new Class[]{clazz},
                 new RcfTcpClientInvocationHandler(group, timeout,
                         targetInstanceName, codecType));
     }
+
+
+
+
 }
+

@@ -10,10 +10,10 @@ import java.util.Set;
  */
 public class ClientServiceApi {
 
-    public ClientServiceApi() {
-
+    private ClientServiceApi() {
     }
 
+    //这种单例效果最好
     private static class SingletonHolder {
         static final ClientServiceApi instance = new ClientServiceApi();
     }

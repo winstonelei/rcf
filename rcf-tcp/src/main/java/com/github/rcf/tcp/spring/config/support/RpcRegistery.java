@@ -39,7 +39,6 @@ public class RpcRegistery implements InitializingBean, DisposableBean {
         ServerServiceApi.getInstance().registerService(group, getLocalhost());
         RcfTcpServer.getInstance().setCodecType(codecType);
         RcfTcpServer.getInstance().setThreadCount(threadCount);
-
         RcfTcpServer.getInstance().start(port,timeout);
 
     }

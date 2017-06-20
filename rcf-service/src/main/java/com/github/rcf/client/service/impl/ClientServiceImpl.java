@@ -28,8 +28,6 @@ public class ClientServiceImpl implements IClientService {
 
     private ZkClient client;
 
-    //private  CuratorFramework client;
-
     public static final int TYPE = 0;
 
     private ConcurrentHashMap<String, Boolean> flag=new ConcurrentHashMap<String, Boolean>();
@@ -61,65 +59,16 @@ public class ClientServiceImpl implements IClientService {
         return addresses;
     }
 
-	/*private void addChildrenListener(final String group, ExecutorService pool) throws Exception {
-		PathChildrenCache childrenCache = new PathChildrenCache(client,"/"+group, true);
-		childrenCache.start(StartMode.POST_INITIALIZED_EVENT);
-		childrenCache.getListenable().addListener(
-               new PathChildrenCacheListener() {
-                   @Override
-                   public void childEvent(CuratorFramework client, PathChildrenCacheEvent event)
-                           throws Exception {
-                       if(event.getType()==PathChildrenCacheEvent.Type.CHILD_REMOVED){//监听子节点被删除的情况
-                           String path=event.getData().getPath();
-                           String[] nodes=path.split("/");// 1:group 2:address
-                           if(nodes.length>0&&nodes.length==3){
-                               updateServerList(nodes[1], nodes[2]);
-                           }
-
-                       }else if(event.getType()==PathChildrenCacheEvent.Type.CHILD_ADDED){//监听增加
-                           String path=event.getData().getPath();
-                           String[] nodes=path.split("/");// 1:group 2:address
-                           if(nodes.length>0&&nodes.length==3){
-                               Map<String, String> valueMap=listChildrenDetail("/"+nodes[1]);
-                               for(String value:valueMap.values()){
-                                   String[] nodes1=value.split(":");
-                                   if(!nodes1[1].matches("\\d*")){
-                                        continue;
-                                   }
-                                   InetSocketAddress socketAddress=new InetSocketAddress(nodes1[0], Integer.parseInt(nodes1[1]));
-                                   Set<InetSocketAddress> addresses=servers.get(group);
-                                   addresses.add(socketAddress);
-                                   servers.put(group, addresses);
-                               }
-
-                           }
-                       }
-                   }
-               },
-               pool
-           );
-	}*/
-
-
     @Override
     public void close() throws Exception {
-        // TODO Auto-generated method stub
         servers.clear();
         client.close();
     }
 
     @Override
     public void connectZookeeper(final String server, final int timeout) throws Exception {
-	/*	client = CuratorFrameworkFactory.builder()
-	            .connectString(server)
-	            .sessionTimeoutMs(timeout)
-	            .connectionTimeoutMs(timeout)
-	            .retryPolicy(new ExponentialBackoffRetry(1000, 3))
-	            .build();
-	    client.start();*/
-
         Config config = new Config();
-        config.setRegistryAddress("121.40.129.155:2181");
+        config.setRegistryAddress(server);
         config.setInvokeTimeoutMillis(timeout);
         zookeeperTransporter = new CuratorZookeeperTransporter();
         client = zookeeperTransporter.connect(config);
@@ -203,5 +152,45 @@ public class ClientServiceImpl implements IClientService {
 	public void setClient(CuratorFramework client) {
 		this.client = client;
 	}*/
+
+    	/*private void addChildrenListener(final String group, ExecutorService pool) throws Exception {
+		PathChildrenCache childrenCache = new PathChildrenCache(client,"/"+group, true);
+		childrenCache.start(StartMode.POST_INITIALIZED_EVENT);
+		childrenCache.getListenable().addListener(
+               new PathChildrenCacheListener() {
+                   @Override
+                   public void childEvent(CuratorFramework client, PathChildrenCacheEvent event)
+                           throws Exception {
+                       if(event.getType()==PathChildrenCacheEvent.Type.CHILD_REMOVED){//监听子节点被删除的情况
+                           String path=event.getData().getPath();
+                           String[] nodes=path.split("/");// 1:group 2:address
+                           if(nodes.length>0&&nodes.length==3){
+                               updateServerList(nodes[1], nodes[2]);
+                           }
+
+                       }else if(event.getType()==PathChildrenCacheEvent.Type.CHILD_ADDED){//监听增加
+                           String path=event.getData().getPath();
+                           String[] nodes=path.split("/");// 1:group 2:address
+                           if(nodes.length>0&&nodes.length==3){
+                               Map<String, String> valueMap=listChildrenDetail("/"+nodes[1]);
+                               for(String value:valueMap.values()){
+                                   String[] nodes1=value.split(":");
+                                   if(!nodes1[1].matches("\\d*")){
+                                        continue;
+                                   }
+                                   InetSocketAddress socketAddress=new InetSocketAddress(nodes1[0], Integer.parseInt(nodes1[1]));
+                                   Set<InetSocketAddress> addresses=servers.get(group);
+                                   addresses.add(socketAddress);
+                                   servers.put(group, addresses);
+                               }
+
+                           }
+                       }
+                   }
+               },
+               pool
+           );
+	}*/
+
 
 }

@@ -31,7 +31,6 @@ public class ServerServiceImpl implements IserverService {
 
     @Override
     public void registerServer(String group, String server) throws Exception{
-        //client.create("/" + group, group, false, true);
         client.create("/" + group + "/"+server, server,true,true);
     }
 

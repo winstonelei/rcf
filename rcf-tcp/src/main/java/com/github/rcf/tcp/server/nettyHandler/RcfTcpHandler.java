@@ -4,8 +4,7 @@ import com.github.rcf.core.bean.RcfRequest;
 import com.github.rcf.core.bean.RcfResponse;
 import com.github.rcf.core.server.process.handlerFactory.RcfRpcServerHandlerFactory;
 import com.github.rcf.core.thread.CountableThreadPool;
-import com.github.rcf.factory.RcfServiceFactory;
-import com.github.rcf.tcp.client.RcfRpcClientImpl;
+import com.github.rcf.tcp.server.RcfTcpServer;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
@@ -18,8 +17,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.Callable;
 
 /**
  * Created by winstone on 2017/5/30 0030.
@@ -45,8 +43,7 @@ public class RcfTcpHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        LOGGER.error("远程主机ip和端口="+ctx.channel().remoteAddress());
-    //    RcfServiceFactory.getIserverService().registerClient(getLocalhost(), ctx.channel().remoteAddress().toString());
+        LOGGER.info("远程主机ip和端口="+ctx.channel().remoteAddress());
     }
 
     @Override
@@ -72,88 +69,32 @@ public class RcfTcpHandler extends ChannelInboundHandlerAdapter {
             throw new Exception(
                     "receive message error,only support RequestWrapper || List");
         }
-        threadPool.execute(new ServerHandlerRunnable(ctx,msg));
 
+        RcfRequest request = (RcfRequest) msg;
+        RcfResponse response = new RcfResponse();
+        LOGGER.info("服务端收到的消息id="+request.getId());
+        ServerMessageHander task =  new ServerMessageHander((RcfRequest) msg,response);
+        RcfTcpServer.submit(task,ctx,request,response);
     }
-    /**
-     *
-     * @param ctx
-     * @param message
-     */
-    private void handleRequestWithSingleThread(final ChannelHandlerContext ctx,  Object message){
-        RcfResponse rcfResponse = null;
-        try{
-            RcfRequest request = (RcfRequest) message;
-            rcfResponse = RcfRpcServerHandlerFactory
-                    .getTcpServerHandler().handleRequest(request, codecType);
-            if(ctx.channel().isOpen()){
-                ChannelFuture wf = ctx.channel().writeAndFlush(rcfResponse);
-                wf.addListener(new ChannelFutureListener() {
-                    public void operationComplete(ChannelFuture future) throws Exception {
-                        if (!future.isSuccess()) {
-                            LOGGER.error("11111server write response error,client  host is: " + ((InetSocketAddress) ctx.channel().remoteAddress()).getHostName()+":"+((InetSocketAddress) ctx.channel().remoteAddress()).getPort()+",server Ip:"+getLocalhost());
-                            ctx.channel().close();
-                        }
-                    }
-                });
+
+
+    private class ServerMessageHander implements Callable<Boolean>{
+        private RcfRequest request = null;
+        private RcfResponse response = null;
+
+        ServerMessageHander(RcfRequest request,RcfResponse response){
+            this.request = request;
+            this.response = response;
+        }
+
+        public Boolean call() {
+            try {
+                response = RcfRpcServerHandlerFactory.getTcpServerHandler().handleRequestWithCallable(request, response);
+                return Boolean.TRUE;
+            }catch (Exception e){
+                LOGGER.error(e.getMessage());
+                return Boolean.FALSE;
             }
-
-        }catch(Exception e){
-            LOGGER.error(e.getMessage());
-
-            sendErrorResponse(ctx, (RcfRequest) message,e.getMessage()+",server Ip:"+getLocalhost());
-        }finally{
-            ReferenceCountUtil.release(message);
-        }
-    }
-
-
-    private void sendErrorResponse(final ChannelHandlerContext ctx, final RcfRequest request,String errorMessage) {
-        RcfResponse commonRpcResponse =
-                new RcfResponse(request.getId(), request.getCodecType());
-        commonRpcResponse.setException(new Exception(errorMessage));
-        ChannelFuture wf = ctx.channel().writeAndFlush(commonRpcResponse);
-        wf.addListener(new ChannelFutureListener() {
-            public void operationComplete(ChannelFuture future) throws Exception {
-                if (!future.isSuccess()) {
-                    LOGGER.error("2222server write response error,request id is: " + request.getId()+",client Ip is:"+ctx.channel().remoteAddress().toString()+",server Ip:"+getLocalhost());
-                    ctx.channel().close();
-                }
-            }
-        });
-    }
-
-    private String getLocalhost(){
-        try {
-            String ip = InetAddress.getLocalHost().getHostAddress();
-            return ip+":"+port;
-        } catch (UnknownHostException e) {
-            throw new RuntimeException("无法获取本地Ip",e);
-        }
-
-    }
-
-    private class ServerHandlerRunnable implements Runnable{
-
-        private  ChannelHandlerContext ctx;
-
-        private  Object message;
-
-        /**
-         * @param ctx
-         * @param message
-         */
-        public ServerHandlerRunnable(ChannelHandlerContext ctx, Object message) {
-            super();
-            this.ctx = ctx;
-            this.message = message;
-        }
-
-
-
-        @Override
-        public void run() {
-            handleRequestWithSingleThread(ctx, message);
         }
 
     }

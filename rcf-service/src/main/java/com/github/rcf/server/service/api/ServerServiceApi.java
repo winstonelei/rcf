@@ -7,7 +7,7 @@ import com.github.rcf.factory.RcfServiceFactory;
  */
 public class ServerServiceApi {
 
-    public ServerServiceApi() {
+    private ServerServiceApi() {
     }
     private static class SingletonHolder {
         static final ServerServiceApi instance = new ServerServiceApi();

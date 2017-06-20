@@ -37,7 +37,7 @@ public class RcfApplication implements InitializingBean {
         }
 
         if(flag==1){//服务端
-            ServerServiceApi.getInstance().connectZookeeper(address, timeout);
+             ServerServiceApi.getInstance().connectZookeeper(address, timeout);
         }else if(flag==2){//客户端
              ClientServiceApi.getInstance().connectZookeeper(address, timeout);
              RcfTcpClientFactory.getInstance().startClient(timeout);//客户端启动

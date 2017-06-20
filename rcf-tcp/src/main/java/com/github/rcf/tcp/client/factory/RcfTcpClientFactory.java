@@ -1,5 +1,6 @@
 package com.github.rcf.tcp.client.factory;
 
+import com.github.rcf.core.bean.RcfResponse;
 import com.github.rcf.tcp.client.RcfRpcClientImpl;
 import com.github.rcf.tcp.client.handler.RcfTcpClientHandler;
 import com.github.rcf.core.client.AbstractRcfRpcClient;
@@ -39,7 +40,7 @@ public class RcfTcpClientFactory  extends AbstractRcfRpcClientFactory {
 
     private static AbstractRcfRpcClientFactory clientFactory = new RcfTcpClientFactory();
 
-   public static AbstractRcfRpcClientFactory getInstance(){
+    public static AbstractRcfRpcClientFactory getInstance(){
        return clientFactory;
    }
 
@@ -66,7 +67,6 @@ public class RcfTcpClientFactory  extends AbstractRcfRpcClientFactory {
 
         });
 
-
         LOGGER.info("----------------客户端服务启动结束-------------------------------");
     }
 
@@ -88,8 +88,20 @@ public class RcfTcpClientFactory  extends AbstractRcfRpcClientFactory {
             LOGGER.error("Create connection to " + targetIP + ":" + targetPort + " error", future.cause());
             throw new Exception("Create connection to " + targetIP + ":" + targetPort + " error", future.cause());
         }
-        AbstractRcfRpcClient client = new RcfRpcClientImpl(future);
+        final RcfRpcClientImpl client = new RcfRpcClientImpl();
         super.putRpcClient(key, client);
+
+        future.addListener(new ChannelFutureListener() {
+            @Override
+            public void operationComplete(ChannelFuture channelFuture) throws Exception {
+                if(channelFuture.isSuccess()){
+                    RcfTcpClientHandler handler = channelFuture.channel().pipeline().get(RcfTcpClientHandler.class);
+                    client.setRcfTcpClientHandler(handler);
+
+                }
+            }
+        });
+
         return client;
     }
 

@@ -1,7 +1,10 @@
 package com.github.rcf.tcp.client.handler;
 
+import com.github.rcf.core.bean.RcfRequest;
+import com.github.rcf.core.callback.AsyncRPCCallback;
 import com.github.rcf.tcp.client.factory.RcfTcpClientFactory;
 import com.github.rcf.core.bean.RcfResponse;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.ReferenceCountUtil;
@@ -9,6 +12,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.io.IOException;
+import java.net.SocketAddress;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by winstone on 2017/5/30 0030.
@@ -17,11 +23,31 @@ public class RcfTcpClientHandler  extends ChannelInboundHandlerAdapter {
 
     private static final Log LOGGER = LogFactory.getLog(RcfTcpClientHandler.class);
 
+    private Map<String,AsyncRPCCallback> mapCallBack = new ConcurrentHashMap<String, AsyncRPCCallback>();
+
+    private volatile Channel channel;
+
+    private SocketAddress remoteAddr;
+
     private static final boolean isDebugEnabled = LOGGER.isDebugEnabled();
 
     public RcfTcpClientHandler() {
         super();
     }
+
+
+
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        super.channelActive(ctx);
+        this.remoteAddr = this.channel.remoteAddress();
+    }
+
+
+    public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
+        super.channelRegistered(ctx);
+        this.channel = ctx.channel();
+    }
+
 
     public void channelRead(ChannelHandlerContext ctx, Object msg)
             throws Exception {
@@ -33,7 +59,12 @@ public class RcfTcpClientHandler  extends ChannelInboundHandlerAdapter {
                             + ctx.channel().remoteAddress() + ",request is:"
                             + response.getRequestId());
                 }
-                RcfTcpClientFactory.getInstance().receiveResponse(response);
+                AsyncRPCCallback callback = mapCallBack.get(String.valueOf(response.getRequestId()));
+                if(callback!=null){
+                    mapCallBack.remove(response.getRequestId());
+                    callback.over(response);
+                }
+
             } else {
                 LOGGER.error("receive message error,only support List || ResponseWrapper");
                 throw new Exception(
@@ -66,5 +97,22 @@ public class RcfTcpClientHandler  extends ChannelInboundHandlerAdapter {
         }
     }
 
+
+    public AsyncRPCCallback sendRequest(RcfRequest request){
+        AsyncRPCCallback callback = new AsyncRPCCallback(request);
+        mapCallBack.put(String.valueOf(request.getId()),callback);
+        if(channel.isOpen()){
+            channel.writeAndFlush(request);
+        }
+        return callback;
+    }
+
+    public Channel getChannel() {
+        return channel;
+    }
+
+    public void setChannel(Channel channel) {
+        this.channel = channel;
+    }
 
 }
