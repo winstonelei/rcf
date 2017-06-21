@@ -106,7 +106,7 @@ public class RcfRpcRouteServiceImpl implements IRcfRpcRouteService {
 			RpcServiceRouteMessage RpcServiceRouteMessage=new RpcServiceRouteMessage();
 			RpcServiceRouteMessage.setObjCls(instance.getClass());
 			String simplename=instance.getClass().getSimpleName();
-			simplename= simplename.substring(0, 1).toLowerCase()+ simplename.substring(1);
+			simplename = simplename.substring(0, 1).toLowerCase()+ simplename.substring(1);
 			
 			RpcServiceRouteMessage.setHttpType(httpType);
 			RpcServiceRouteMessage.setReturnType(returnType);

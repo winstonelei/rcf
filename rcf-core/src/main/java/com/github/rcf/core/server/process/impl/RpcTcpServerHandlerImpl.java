@@ -109,8 +109,6 @@ public class RpcTcpServerHandlerImpl extends AbstractRcfRpcTcpServerHandler {
 			}
 			method.setAccessible(true);
 
-			//LOGGER.error("请求结果返回值处理后的结果="+method.invoke(rpcServerBean.getObject(), requestObjects));
-
 			responseWrapper.setResponse(method.invoke(rpcServerBean.getObject(), requestObjects));
 
 		}catch(Exception e){
