@@ -48,9 +48,7 @@ public class RcfHttpServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg)
             throws Exception {
-
           threadPool.execute(new HttpServerHandlerRunnable(ctx,msg));
-
     }
 
 

@@ -34,9 +34,8 @@ public class RcfHttpService implements ApplicationContextAware, ApplicationListe
 
     @Override
     public void onApplicationEvent(ApplicationEvent event) {
-        // TODO Auto-generated method stub
         Object object=applicationContext.getBean(ref);
-        RcfHttpBean rpcHttpBean=new RcfHttpBean(object, httpType, returnType);
+        RcfHttpBean rpcHttpBean = new RcfHttpBean(object, httpType, returnType);
         RcfHttpServer.getInstance().registerProcessor(projectname, rpcHttpBean);//注册http服务
 
     }
@@ -44,7 +43,6 @@ public class RcfHttpService implements ApplicationContextAware, ApplicationListe
     @Override
     public void setApplicationContext(ApplicationContext applicationContext)
             throws BeansException {
-        // TODO Auto-generated method stub
         this.applicationContext=applicationContext;
     }
 
