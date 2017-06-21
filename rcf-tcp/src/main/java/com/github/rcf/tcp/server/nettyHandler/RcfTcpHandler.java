@@ -1,7 +1,9 @@
 package com.github.rcf.tcp.server.nettyHandler;
 
+import com.github.rcf.core.bean.Constants;
 import com.github.rcf.core.bean.RcfRequest;
 import com.github.rcf.core.bean.RcfResponse;
+import com.github.rcf.core.compiler.AccessAdaptiveProvider;
 import com.github.rcf.core.server.process.handlerFactory.RcfRpcServerHandlerFactory;
 import com.github.rcf.core.thread.CountableThreadPool;
 import com.github.rcf.tcp.server.RcfTcpServer;
@@ -26,9 +28,6 @@ public class RcfTcpHandler extends ChannelInboundHandlerAdapter {
 
     private static final Log LOGGER = LogFactory.getLog(RcfTcpHandler.class);
 
-
-    private CountableThreadPool threadPool;
-
     private int port;
 
     private int codecType;//编码类型
@@ -37,7 +36,8 @@ public class RcfTcpHandler extends ChannelInboundHandlerAdapter {
         super();
         this.port = port;
         this.codecType = codecType;
-        threadPool = new CountableThreadPool(threadCount);
+        RcfRpcServerHandlerFactory.getTcpServerHandler().registerProcessor(Constants.SYSTEM_PROPERITY_ACCESS_ADAPTIVE_PROVIDER,new AccessAdaptiveProvider());
+
 
     }
 
@@ -69,7 +69,6 @@ public class RcfTcpHandler extends ChannelInboundHandlerAdapter {
             throw new Exception(
                     "receive message error,only support RequestWrapper || List");
         }
-
         RcfRequest request = (RcfRequest) msg;
         RcfResponse response = new RcfResponse();
         LOGGER.info("服务端收到的消息id="+request.getId());

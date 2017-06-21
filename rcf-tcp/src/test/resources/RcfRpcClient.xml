@@ -18,7 +18,8 @@
     <rcfrpc:application id="rpcRegistryApplicationClient" address="121.40.129.155:2181" flag="2" timeout="20000"></rcfrpc:application>
     
     <!--group 可以同时支持多组，以符合,隔开  -->
-    <rcfrpc:reference id="demoServiceClient"  interfacename="com.github.rcf.tcp.demo.service.IDemoService"   codecType="1" timeout="1000"  group="rcf"/>
+    <rcfrpc:reference id="demoServiceClient"  interfacename="com.github.rcf.tcp.demo.service.IDemoService"   codecType="2" timeout="1000"  group="rcf"/>
 
+    <rcfrpc:reference id="access"  interfacename="com.github.rcf.core.compiler.AccessAdaptive"   codecType="2" timeout="1000"  group="rcf"/>
 
 </beans>

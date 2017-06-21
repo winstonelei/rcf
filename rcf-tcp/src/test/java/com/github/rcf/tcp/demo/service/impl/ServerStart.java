@@ -9,7 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @author winstone
  *
  */
-public class DeomoServiceTest {
+public class ServerStart {
 	
 	public static void main(String[] args) {
 		new ClassPathXmlApplicationContext("RcfRpcServer.xml");
