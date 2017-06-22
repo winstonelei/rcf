@@ -54,7 +54,7 @@ public abstract  class AbstarctRcfInvocationHandler implements
         String methodName = method.getName();
         String[] argTypes = createParamSignature(method.getParameterTypes());
         Object result= client.invokeImpl(targetInstanceName, methodName, argTypes, args, timeout, codecType);
-        System.out.println("得到的负载均衡服务端地址="+server.getAddress().getHostAddress()+",port:"+server.getPort());
+       // System.out.println("得到的负载均衡服务端地址="+server.getAddress().getHostAddress()+",port:"+server.getPort());
         return result;
     }
 

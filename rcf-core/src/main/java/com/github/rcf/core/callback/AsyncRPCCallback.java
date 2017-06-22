@@ -4,6 +4,8 @@ import com.github.rcf.core.bean.RcfConstants;
 import com.github.rcf.core.bean.RcfRequest;
 import com.github.rcf.core.bean.RcfResponse;
 import com.github.rcf.core.serializable.RcfCodes;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
@@ -15,6 +17,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class AsyncRPCCallback {
 
+    private static final Log LOGGER = LogFactory.getLog(AsyncRPCCallback.class);
 
     private RcfRequest rcfRequest;
 
@@ -36,6 +39,7 @@ public class AsyncRPCCallback {
             if(this.rcfResponse!=null){
                 return this.rcfResponse.getResponse();
             }else{
+                LOGGER.error("出现异常...返回值为空.....");
                 return null;
             }
       }finally {
@@ -48,6 +52,8 @@ public class AsyncRPCCallback {
            lock.lock();
            lockCondition.signal();
            this.rcfResponse = response;
+           LOGGER.info("客户端接受返回结果id="+rcfResponse.getRequestId());
+
            if (rcfResponse.getResponse() instanceof byte[]) {
                String responseClassName = null;
                if(rcfResponse.getResponseClassName() != null){
