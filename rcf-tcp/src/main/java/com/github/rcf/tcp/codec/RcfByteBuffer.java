@@ -1,13 +1,13 @@
 package com.github.rcf.tcp.codec;
 
-import com.github.rcf.core.buffer.RpcByteBuffer;
+import com.github.rcf.core.buffer.RcfBaseByteBuffer;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 
 /**
  * Created by winstone on 2017/5/30 0030.
  */
-public class RcfByteBuffer implements RpcByteBuffer {
+public class RcfByteBuffer implements RcfBaseByteBuffer {
 
     private ByteBuf buffer;
 
