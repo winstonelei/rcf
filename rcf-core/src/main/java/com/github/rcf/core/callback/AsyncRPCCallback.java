@@ -1,6 +1,6 @@
 package com.github.rcf.core.callback;
 
-import com.github.rcf.core.bean.Constants;
+import com.github.rcf.core.bean.RcfConstants;
 import com.github.rcf.core.bean.RcfRequest;
 import com.github.rcf.core.bean.RcfResponse;
 import com.github.rcf.core.serializable.RcfCodes;
@@ -32,7 +32,7 @@ public class AsyncRPCCallback {
     public Object start() throws InterruptedException {
       try{
             lock.lock();
-            lockCondition.await(Constants.SYSTEM_PROPERTY_MESSAGE_CALLBACK_TIMEOUT, TimeUnit.MILLISECONDS);
+            lockCondition.await(RcfConstants.SYSTEM_PROPERTY_MESSAGE_CALLBACK_TIMEOUT, TimeUnit.MILLISECONDS);
             if(this.rcfResponse!=null){
                 return this.rcfResponse.getResponse();
             }else{

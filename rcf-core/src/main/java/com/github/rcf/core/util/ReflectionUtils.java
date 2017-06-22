@@ -83,7 +83,6 @@ public class ReflectionUtils {
 
     public static Class<?> getGenericClass(ParameterizedType parameterizedType, int i) {
         Object genericClass = parameterizedType.getActualTypeArguments()[i];
-
         if (genericClass instanceof GenericArrayType) {
             return (Class<?>) ((GenericArrayType) genericClass).getGenericComponentType();
         } else if (genericClass instanceof ParameterizedType) {

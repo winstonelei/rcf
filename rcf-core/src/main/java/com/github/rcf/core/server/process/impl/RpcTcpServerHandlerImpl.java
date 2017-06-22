@@ -107,6 +107,7 @@ public class RpcTcpServerHandlerImpl extends AbstractRcfRpcTcpServerHandler {
 				}
 				requestObjects = new Object[] {};
 			}
+
 			method.setAccessible(true);
 
 			responseWrapper.setResponse(method.invoke(rpcServerBean.getObject(), requestObjects));

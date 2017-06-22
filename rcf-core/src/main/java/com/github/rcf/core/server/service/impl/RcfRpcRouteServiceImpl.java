@@ -84,9 +84,9 @@ public class RcfRpcRouteServiceImpl implements IRcfRpcRouteService {
 				
 				method.setAccessible(true);
 				
-				Object object=routeInfo.getObjCls().newInstance();
+				Object object = routeInfo.getObjCls().newInstance();
 
-				Object result=getResult(method, object, objs);
+				Object result = getResult(method, object, objs);
 					
 				return result;
 			}
@@ -105,7 +105,7 @@ public class RcfRpcRouteServiceImpl implements IRcfRpcRouteService {
 		for(Method method:methods){
 			RpcServiceRouteMessage RpcServiceRouteMessage=new RpcServiceRouteMessage();
 			RpcServiceRouteMessage.setObjCls(instance.getClass());
-			String simplename=instance.getClass().getSimpleName();
+			String simplename = instance.getClass().getSimpleName();
 			simplename = simplename.substring(0, 1).toLowerCase()+ simplename.substring(1);
 			
 			RpcServiceRouteMessage.setHttpType(httpType);

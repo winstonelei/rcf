@@ -19,8 +19,7 @@ import java.util.List;
 public class DefaultRpcProtocolImpl implements RcfProtocol {
 	public static final int TYPE = 1;
 
-	private static final Log LOGGER = LogFactory
-			.getLog(DefaultRpcProtocolImpl.class);
+	private static final Log LOGGER = LogFactory.getLog(DefaultRpcProtocolImpl.class);
 	
 	private static final int REQUEST_HEADER_LEN = 1 * 6 + 5 * 4 ;
 

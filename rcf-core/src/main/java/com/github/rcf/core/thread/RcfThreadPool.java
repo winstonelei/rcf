@@ -1,6 +1,6 @@
 package com.github.rcf.core.thread;
 
-import com.github.rcf.core.bean.Constants;
+import com.github.rcf.core.bean.RcfConstants;
 import com.github.rcf.core.thread.policy.*;
 
 import java.util.Timer;
@@ -20,7 +20,7 @@ public class RcfThreadPool {
 
 
     private static RejectedExecutionHandler createPolicy(){
-        RejectedPolicyType rejectedPolicyType = RejectedPolicyType.fromString(System.getProperty(Constants.SYSTEM_PROPERTY_THREADPOOL_REJECTED_POLICY_ATTR,"BlockingPolicy"));
+        RejectedPolicyType rejectedPolicyType = RejectedPolicyType.fromString(System.getProperty(RcfConstants.SYSTEM_PROPERTY_THREADPOOL_REJECTED_POLICY_ATTR,"BlockingPolicy"));
         switch (rejectedPolicyType){
             case BLOCKING_POLICY:
                 return new BlockingPolicy();
@@ -37,12 +37,12 @@ public class RcfThreadPool {
     }
 
     private static BlockingQueue<Runnable> createBlockingQueue(int queues){
-        BlockingQueueType blockingQueueType = BlockingQueueType.fromString(System.getProperty(Constants.SYSTEM_PROPERTY_THREADPOOL_QUEUE_NAME_ATTR,"LinkedBlockingQueue"));
+        BlockingQueueType blockingQueueType = BlockingQueueType.fromString(System.getProperty(RcfConstants.SYSTEM_PROPERTY_THREADPOOL_QUEUE_NAME_ATTR,"LinkedBlockingQueue"));
         switch (blockingQueueType){
             case LINKED_BLOCKING_QUEUE:
                 return new LinkedBlockingDeque<>();
             case ARRAY_BLOCKING_QUEUE:
-                return new ArrayBlockingQueue<Runnable>(Constants.PARALLEL * queues);
+                return new ArrayBlockingQueue<Runnable>(RcfConstants.PARALLEL * queues);
             case SYNCHROUNS_QUEUE:
                 return new SynchronousQueue<Runnable>();
         }
@@ -52,7 +52,6 @@ public class RcfThreadPool {
 
 
     public static Executor getExecutor(int threads,int queues){
-
        String name = "RcfThradFactory";
        ThreadPoolExecutor executor = new ThreadPoolExecutor(threads,threads,0,TimeUnit.MILLISECONDS,
                createBlockingQueue(queues),new NamedThreadFactory(name,true),createPolicy());
