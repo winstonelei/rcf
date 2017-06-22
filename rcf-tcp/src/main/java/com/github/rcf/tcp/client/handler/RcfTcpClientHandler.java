@@ -23,7 +23,7 @@ public class RcfTcpClientHandler  extends ChannelInboundHandlerAdapter {
 
     private static final Log LOGGER = LogFactory.getLog(RcfTcpClientHandler.class);
 
-    private Map<String,AsyncRPCCallback> mapCallBack = new ConcurrentHashMap<String, AsyncRPCCallback>();
+    public static Map<String,AsyncRPCCallback> mapCallBack = new ConcurrentHashMap<String, AsyncRPCCallback>();
 
     private volatile Channel channel;
 
@@ -102,7 +102,10 @@ public class RcfTcpClientHandler  extends ChannelInboundHandlerAdapter {
         AsyncRPCCallback callback = new AsyncRPCCallback(request);
         mapCallBack.put(String.valueOf(request.getId()),callback);
         if(channel.isOpen()){
+            LOGGER.info("客户端发送的requestId="+request.getId());
             channel.writeAndFlush(request);
+        }else{
+            LOGGER.error("客户端发送请求的通道异常"+request.getId()+"丢失");
         }
         return callback;
     }

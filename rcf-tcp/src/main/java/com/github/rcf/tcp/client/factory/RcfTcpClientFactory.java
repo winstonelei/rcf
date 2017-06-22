@@ -86,7 +86,8 @@ public class RcfTcpClientFactory  extends AbstractRcfRpcClientFactory {
             LOGGER.error("Create connection to " + targetIP + ":" + targetPort + " error", future.cause());
             throw new Exception("Create connection to " + targetIP + ":" + targetPort + " error", future.cause());
         }
-        final RcfRpcClientImpl client = new RcfRpcClientImpl();
+
+        final RcfRpcClientImpl client = new RcfRpcClientImpl(future);
         super.putRpcClient(key, client);
 
         future.addListener(new ChannelFutureListener() {

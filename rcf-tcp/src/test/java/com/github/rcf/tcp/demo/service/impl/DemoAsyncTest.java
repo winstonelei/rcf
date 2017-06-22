@@ -14,7 +14,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class DemoAsyncTest {
 
     public static void main(String[] args) {
-        //ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:rpc-invoke-config-client.xml");
 
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("RcfRpcClient.xml");
 

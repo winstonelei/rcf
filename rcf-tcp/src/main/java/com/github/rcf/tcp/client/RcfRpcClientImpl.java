@@ -27,6 +27,11 @@ public class RcfRpcClientImpl extends AbstractRcfRpcClient {
     private Condition connectStatus = lock.newCondition();
     private Condition handlerStatus = lock.newCondition();
 
+    private ChannelFuture future;
+
+    public RcfRpcClientImpl(ChannelFuture future){
+        this.future = future;
+    }
 
     @Override
     public String getServerIP() {
@@ -46,8 +51,18 @@ public class RcfRpcClientImpl extends AbstractRcfRpcClient {
     @Override
     public AsyncRPCCallback sendRequest(final RcfRequest rcfRequest)
             throws Exception {
-           LOGGER.info("客户端发送请求的requestId="+rcfRequest.getId());
-           return this.getRcfTcpClientHandler().sendRequest(rcfRequest);
+            AsyncRPCCallback callback = new AsyncRPCCallback(rcfRequest);
+            RcfTcpClientHandler.mapCallBack.put(String.valueOf(rcfRequest.getId()),callback);
+            if(future.channel().isOpen()){
+                LOGGER.debug("客户端发送的requestId="+rcfRequest.getId());
+                future.channel().writeAndFlush(rcfRequest);
+            }else{
+                LOGGER.error("客户端发送请求的通道异常"+rcfRequest.getId()+"丢失");
+            }
+            return callback;
+  /*
+           LOGGER.info("生成rcfrequest待发送="+rcfRequest.getId());
+           return this.getRcfTcpClientHandler().sendRequest(rcfRequest);*/
 
     }
 
