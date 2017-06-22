@@ -5,7 +5,7 @@ package com.github.rcf.core.protocol.impl;
 
 import com.github.rcf.core.bean.RcfRequest;
 import com.github.rcf.core.bean.RcfResponse;
-import com.github.rcf.core.buffer.RpcByteBuffer;
+import com.github.rcf.core.buffer.RcfBaseByteBuffer;
 import com.github.rcf.core.protocol.RcfProtocol;
 import com.github.rcf.core.protocol.rcf.RcfRpcCustomProtocol;
 import com.github.rcf.core.serializable.RcfCodes;
@@ -33,8 +33,8 @@ public class DefaultRpcProtocolImpl implements RcfProtocol {
 
 	
 	@Override
-	public RpcByteBuffer encode(Object message,
-								RpcByteBuffer bytebufferWrapper) throws Exception {
+	public RcfBaseByteBuffer encode(Object message,
+									RcfBaseByteBuffer bytebufferWrapper) throws Exception {
 		if (!(message instanceof RcfRequest)
 				&& !(message instanceof RcfResponse)) {
 			throw new Exception(
@@ -74,7 +74,7 @@ public class DefaultRpcProtocolImpl implements RcfProtocol {
 						+ targetInstanceNameByte.length + methodNameByte.length
 						+ requestArgTypesLen + requestArgsLen;
 
-				RpcByteBuffer byteBuffer = bytebufferWrapper
+				RcfBaseByteBuffer byteBuffer = bytebufferWrapper
 						.get(capacity);
 				byteBuffer.writeByte(RcfRpcCustomProtocol.CURRENT_VERSION);
 				byteBuffer.writeByte((byte) TYPE);
@@ -150,7 +150,7 @@ public class DefaultRpcProtocolImpl implements RcfProtocol {
 			if (wrapper.getCodecType() == RcfCodes.PB_CODEC) {
 				capacity += className.length;
 			}
-			RpcByteBuffer byteBuffer = bytebufferWrapper.get(capacity);
+			RcfBaseByteBuffer byteBuffer = bytebufferWrapper.get(capacity);
 			byteBuffer.writeByte(RcfRpcCustomProtocol.CURRENT_VERSION);
 			byteBuffer.writeByte((byte) TYPE);
 			byteBuffer.writeByte(VERSION);
@@ -176,8 +176,8 @@ public class DefaultRpcProtocolImpl implements RcfProtocol {
 
 	
 	@Override
-	public Object decode(RpcByteBuffer wrapper, Object errorObject,
-			int... originPosArray) throws Exception {
+	public Object decode(RcfBaseByteBuffer wrapper, Object errorObject,
+						 int... originPosArray) throws Exception {
 		final int originPos;
 		if (originPosArray != null && originPosArray.length == 1) {
 			originPos = originPosArray[0];

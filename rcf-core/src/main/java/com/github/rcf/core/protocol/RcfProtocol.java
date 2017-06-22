@@ -1,6 +1,6 @@
 package com.github.rcf.core.protocol;
 
-import com.github.rcf.core.buffer.RpcByteBuffer;
+import com.github.rcf.core.buffer.RcfBaseByteBuffer;
 
 /**
  * Created by winstone on 2017/5/27.
@@ -13,7 +13,7 @@ public interface RcfProtocol {
      * @return
      * @throws Exception
      */
-    public RpcByteBuffer encode(Object message, RpcByteBuffer bytebufferWrapper) throws Exception;
+    public RcfBaseByteBuffer encode(Object message, RcfBaseByteBuffer bytebufferWrapper) throws Exception;
 
     /**
      * 解码
@@ -23,6 +23,6 @@ public interface RcfProtocol {
      * @return
      * @throws Exception
      */
-    public Object decode(RpcByteBuffer wrapper, Object errorObject,int...originPos) throws Exception;
+    public Object decode(RcfBaseByteBuffer wrapper, Object errorObject, int...originPos) throws Exception;
 
 }

@@ -7,9 +7,9 @@ package com.github.rcf.core.buffer;
  * @author winstone
  *
  */
-public interface RpcByteBuffer {
+public interface RcfBaseByteBuffer {
 	
-	public RpcByteBuffer get(int capacity);
+	public RcfBaseByteBuffer get(int capacity);
 	
 	public void writeByte(int index, byte data);
 	

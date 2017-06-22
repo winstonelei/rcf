@@ -1,8 +1,6 @@
 package com.github.rcf.core.protocol.rcf;
 
-import com.github.rcf.core.bean.RcfRequest;
-import com.github.rcf.core.bean.RcfResponse;
-import com.github.rcf.core.buffer.RpcByteBuffer;
+import com.github.rcf.core.buffer.RcfBaseByteBuffer;
 import com.github.rcf.core.protocol.RcfProtocol;
 
 /**
@@ -14,12 +12,12 @@ public class RcfRpcCustomProtocol {
 
     public static final byte CURRENT_VERSION = (byte)1;
 
-    public static RpcByteBuffer encode(Object message,RpcByteBuffer bytebufferWrapper) throws Exception {
+    public static RcfBaseByteBuffer encode(Object message, RcfBaseByteBuffer bytebufferWrapper) throws Exception {
         RcfProtocol protocol =  RcfProtocolFactory.getProtocol();
         return protocol.encode(message, bytebufferWrapper);
     }
 
-    public static Object decode(RpcByteBuffer wrapper, Object errorObject) throws Exception {
+    public static Object decode(RcfBaseByteBuffer wrapper, Object errorObject) throws Exception {
         final int originPos = wrapper.readerIndex();
         if(wrapper.readableBytes() < 2){
             wrapper.setReaderIndex(originPos);
