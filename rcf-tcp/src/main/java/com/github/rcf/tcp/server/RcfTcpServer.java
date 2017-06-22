@@ -1,10 +1,9 @@
 package com.github.rcf.tcp.server;
 
-import com.github.rcf.core.bean.Constants;
+import com.github.rcf.core.bean.RcfConstants;
 import com.github.rcf.core.bean.RcfRequest;
 import com.github.rcf.core.bean.RcfResponse;
 import com.github.rcf.core.thread.RcfThreadPool;
-import com.github.rcf.tcp.client.factory.RcfTcpClientFactory;
 import com.github.rcf.tcp.codec.RcfDecoderHandler;
 import com.github.rcf.tcp.codec.RcfEncoderHandler;
 import com.github.rcf.core.server.RcfRpcServer;
@@ -62,8 +61,8 @@ public class RcfTcpServer  implements RcfRpcServer{
 
 
     private static volatile ListeningExecutorService threadPoolExector;
-    private static int threadNums = Constants.SYSTEM_PROPERTY_THREADPOOL_THREAD_NUMS;
-    private static int queueNums = Constants.SYSTEM_PROPERTY_THREADPOOL_QUEUE_NUMS;
+    private static int threadNums = RcfConstants.SYSTEM_PROPERTY_THREADPOOL_THREAD_NUMS;
+    private static int queueNums = RcfConstants.SYSTEM_PROPERTY_THREADPOOL_QUEUE_NUMS;
 
 
     public RcfTcpServer(){}

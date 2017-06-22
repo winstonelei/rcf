@@ -1,9 +1,8 @@
 package com.github.rcf.tcp.client.factory;
 
-import com.github.rcf.core.bean.RcfResponse;
+import com.github.rcf.core.bean.RcfConstants;
 import com.github.rcf.tcp.client.RcfRpcClientImpl;
 import com.github.rcf.tcp.client.handler.RcfTcpClientHandler;
-import com.github.rcf.core.client.AbstractRcfRpcClient;
 import com.github.rcf.core.client.RcfRpcClient;
 import com.github.rcf.core.client.factory.AbstractRcfRpcClientFactory;
 import com.github.rcf.core.thread.NamedThreadFactory;
@@ -19,9 +18,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.net.InetSocketAddress;
-import java.util.Timer;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by winstone on 2017/5/30 0030.
@@ -97,7 +95,19 @@ public class RcfTcpClientFactory  extends AbstractRcfRpcClientFactory {
                 if(channelFuture.isSuccess()){
                     RcfTcpClientHandler handler = channelFuture.channel().pipeline().get(RcfTcpClientHandler.class);
                     client.setRcfTcpClientHandler(handler);
-
+                }else{
+                    //实现客户端重连机制
+                    System.out.println("客户端没有连接到服务器,开始重新连接....");
+                    EventLoop loop = (EventLoop) workerGroup.schedule(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                createClient(targetIP,targetPort);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, RcfConstants.SYSTEM_PROPERTY_CLIENT_RECONNECT_DELAY, TimeUnit.SECONDS);
                 }
             }
         });
