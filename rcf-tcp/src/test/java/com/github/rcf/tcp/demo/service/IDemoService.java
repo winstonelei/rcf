@@ -19,5 +19,7 @@ public interface IDemoService {
 
 	public Simple getSimple(Simple sim);
 
+	CostTime calculate();
+
 
 }

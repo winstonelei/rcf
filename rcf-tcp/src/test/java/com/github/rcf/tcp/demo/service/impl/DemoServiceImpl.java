@@ -3,6 +3,7 @@
  */
 package com.github.rcf.tcp.demo.service.impl;
 
+import com.github.rcf.tcp.demo.service.CostTime;
 import com.github.rcf.tcp.demo.service.IDemoService;
 import com.github.rcf.tcp.demo.service.Simple;
 import org.apache.commons.logging.Log;
@@ -74,6 +75,28 @@ public class DemoServiceImpl implements IDemoService {
 	public Simple getSimple(Simple simple) {
 		simple.setAge(simple.getAge()+100);
 		return simple;
+	}
+
+	@Override
+	public CostTime calculate() {
+		CostTime elapse = new CostTime();
+		try {
+			long start = 0, end = 0;
+			start = System.currentTimeMillis();
+			//模拟耗时操作
+			Thread.sleep(3000L);
+			end = System.currentTimeMillis();
+
+			long interval = end - start;
+			elapse.setElapse(interval);
+			elapse.setDetail("I'm winstone,cost time operate succ!");
+			System.out.println("calculate time:" + interval);
+			return elapse;
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			elapse.setDetail("I'm winstone,cost time operate fail!");
+			return elapse;
+		}
 	}
 
 
