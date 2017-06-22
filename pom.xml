@@ -15,6 +15,17 @@
     </properties>
 
 
+    <modules>
+        <module>rcf-core</module>
+        <module>rcf-tcp</module>
+        <module>rcf-http</module>
+        <module>rcf-registry</module>
+        <module>rcf-interceptor</module>
+        <module>rcf-service</module>
+    </modules>
+
+
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -81,18 +92,26 @@
             <version>19.0</version>
         </dependency>
 
-
     </dependencies>
 
 
-    <modules>
-        <module>rcf-core</module>
-        <module>rcf-tcp</module>
-        <module>rcf-http</module>
-        <module>rcf-registry</module>
-        <module>rcf-interceptor</module>
-        <module>rcf-service</module>
-    </modules>
+
+    <build>
+        <plugins>
+            <!-- compiler插件, 设定JDK版本 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <showWarnings>true</showWarnings>
+                </configuration>
+            </plugin>
+        </plugins>
+   </build>
+
 
 
 </project>
